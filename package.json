@@ -1,9 +1,9 @@
 {
-  "name": "diagrams",
+  "name": "smil-2-gif",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "SVG diagram authoring (Vite + TS) with GIF export via Playwright + ffmpeg",
+  "description": "Animated SVG diagrams (SMIL) exported to GIF/WebM/MP4 via Playwright + ffmpeg",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

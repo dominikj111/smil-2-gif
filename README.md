@@ -1,6 +1,6 @@
-# SVG diagrams → GIF
+# smil-2-gif
 
-A tiny authoring pipeline for animated SVG diagrams with GIF export:
+Animated SVG diagrams (SMIL) → GIF/WebM/MP4. A tiny authoring pipeline for animated SVG diagrams:
 
 ```
 src/diagrams/<name>/gen.ts   TS generator  ── npm run gen ──►  src/diagrams/<name>/<name>.svg
