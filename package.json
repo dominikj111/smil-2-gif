@@ -1,0 +1,29 @@
+{
+  "name": "diagrams",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "SVG diagram authoring (Vite + TS) with GIF export via Playwright + ffmpeg",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "gen": "node scripts/gen-all.mjs",
+    "gif:hero": "node scripts/svg-to-gif.mjs src/diagrams/hero-terminal/hero-terminal.svg gifs/hero-terminal.gif --duration 7.5",
+    "gif:architecture": "node scripts/svg-to-gif.mjs src/diagrams/architecture/architecture.svg gifs/architecture.gif --duration 12.5 --fps 24",
+    "check:hero": "node scripts/check-hero.mjs",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "playback": "node scripts/playback-check.mjs",
+    "playback:architecture": "node scripts/playback-architecture.mjs"
+  },
+  "devDependencies": {
+    "gifsicle": "^7.0.1",
+    "playwright": "^1.49.1",
+    "typescript": "^5.7.3",
+    "vite": "^7.3.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "gifsicle@7.0.1": true
+  }
+}

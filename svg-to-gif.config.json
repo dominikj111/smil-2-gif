@@ -1,0 +1,9 @@
+{
+  "fps": 30,
+  "scheme": "dark",
+  "format": "gif",
+  "palette": true,
+  "scaleStrategy": "lanczos",
+  "dpr": 2,
+  "useGifsicle": true
+}

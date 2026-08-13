@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="318" viewBox="0 0 640 318">
+  <style>
+    text { font-family: 'RobotoMono Nerd Font', 'DejaVu Sans Mono', ui-monospace, monospace; }
+    .sans { font-family: 'DejaVu Sans', -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+  </style>
+  <defs>
+    <clipPath id="clip"><rect width="640" height="318" rx="12"/></clipPath>
+  </defs>
+  <rect x="0.5" y="0.5" width="639" height="317" rx="12" fill="#0f172a" stroke="#334155"/>
+  <g clip-path="url(#clip)">
+
+  <rect width="640" height="40" fill="rgba(30,41,59,0.72)"/>
+  <line x1="0" y1="40" x2="640" y2="40" stroke="rgba(51,65,85,0.8)"/>
+  <text x="16" y="21" font-size="13" font-weight="600" fill="#e2e8f0" dominant-baseline="central" class="sans">Events</text>
+  <g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.0667; 0.0667; 1" values="0; 0; 1; 1"/><rect x="70" y="11" width="28" height="18" rx="9" fill="#334155"/></g>
+  <text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">1<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.0667; 0.0867; 0.1467; 0.1467; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">2<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.1467; 0.1667; 0.2400; 0.2400; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">3<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.2400; 0.2600; 0.3333; 0.3333; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">4<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.3333; 0.3533; 0.4267; 0.4267; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">5<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.4267; 0.4467; 0.5200; 0.5200; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="84" y="20" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric: tabular-nums">6<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.5200; 0.5400; 1" values="0; 0; 1; 1"/></text>
+  <circle cx="107" cy="20" r="3" fill="#34d399"><animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1; 0.5; 1"/></circle>
+  <text x="115" y="21" font-size="12" fill="#64748b" dominant-baseline="central" class="sans">live</text>
+  <svg x="596" y="14" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3"/>
+    <circle cx="10" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="16" cy="20" r="2"/>
+  </svg>
+  <svg x="612" y="14" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m3 16 4 4 4-4M7 20V4m14 4-4-4-4 4M17 4v16"/>
+  </svg>
+
+
+  <rect y="40" width="640" height="22" fill="rgba(15,23,42,0.85)"/>
+  <text x="16" y="51" font-size="10.5" fill="#475569" dominant-baseline="central" class="sans" style="letter-spacing: 0.06em">LEVEL</text>
+  <text x="84" y="51" font-size="10.5" fill="#475569" dominant-baseline="central" class="sans" style="letter-spacing: 0.06em">SCOPE</text>
+  <text x="176" y="51" font-size="10.5" fill="#475569" dominant-baseline="central" class="sans" style="letter-spacing: 0.06em">MESSAGE</text>
+  <text x="624" y="51" font-size="10.5" fill="#475569" dominant-baseline="central" class="sans" style="letter-spacing: 0.06em" text-anchor="end">TIME</text>
+  <line x1="0" y1="62" x2="640" y2="62" stroke="rgba(30,41,59,0.5)"/>
+
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.0667; 0.0867; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.0667; 0.0867; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="62" width="2" height="32" rx="1" fill="#fbbf24"/>
+    <line x1="0" y1="94" x2="640" y2="94" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="70.5" width="34" height="15" rx="3" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.3)"/>
+    <text x="44" y="78" font-size="9.6" font-weight="700" fill="#fbbf24" text-anchor="middle" dominant-baseline="central">WRN</text>
+    <text x="84" y="78" font-size="11" fill="#94a3b8">db</text>
+    <text x="176" y="78" font-size="12" fill="#cbd5e1" class="sans">DB connection pool at 90% capacity</text>
+    <text x="624" y="78" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:20.190</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.1467; 0.1667; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.1467; 0.1667; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="94" width="2" height="32" rx="1" fill="#fbbf24"/>
+    <line x1="0" y1="126" x2="640" y2="126" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="102.5" width="34" height="15" rx="3" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.3)"/>
+    <text x="44" y="110" font-size="9.6" font-weight="700" fill="#fbbf24" text-anchor="middle" dominant-baseline="central">WRN</text>
+    <text x="84" y="110" font-size="11" fill="#94a3b8">db</text>
+    <text x="176" y="110" font-size="12" fill="#cbd5e1" class="sans">Slow query detected: 1843ms (threshold 500ms)</text>
+    <text x="624" y="110" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:20.881</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.2400; 0.2600; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.2400; 0.2600; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="126" width="2" height="32" rx="1" fill="#f87171"/>
+    <line x1="0" y1="158" x2="640" y2="158" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="134.5" width="34" height="15" rx="3" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.3)"/>
+    <text x="44" y="142" font-size="9.6" font-weight="700" fill="#f87171" text-anchor="middle" dominant-baseline="central">ERR</text>
+    <text x="84" y="142" font-size="11" fill="#94a3b8">api-server</text>
+    <text x="176" y="142" font-size="12" fill="#cbd5e1" class="sans">POST /api/orders → 500 Internal Server Error</text>
+    <text x="624" y="142" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:21.441</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.3333; 0.3533; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.3333; 0.3533; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="158" width="2" height="32" rx="1" fill="#fbbf24"/>
+    <line x1="0" y1="190" x2="640" y2="190" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="166.5" width="34" height="15" rx="3" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.3)"/>
+    <text x="44" y="174" font-size="9.6" font-weight="700" fill="#fbbf24" text-anchor="middle" dominant-baseline="central">WRN</text>
+    <text x="84" y="174" font-size="11" fill="#94a3b8">worker</text>
+    <text x="176" y="174" font-size="12" fill="#cbd5e1" class="sans">Promise rejected — order confirmation not sent</text>
+    <text x="624" y="174" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:21.509</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.4267; 0.4467; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.4267; 0.4467; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="190" width="2" height="32" rx="1" fill="#f87171"/>
+    <line x1="0" y1="222" x2="640" y2="222" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="198.5" width="34" height="15" rx="3" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.3)"/>
+    <text x="44" y="206" font-size="9.6" font-weight="700" fill="#f87171" text-anchor="middle" dominant-baseline="central">ERR</text>
+    <text x="84" y="206" font-size="11" fill="#94a3b8">browser</text>
+    <text x="176" y="206" font-size="12" fill="#cbd5e1" class="sans">Cannot read properties of null: 'id'</text>
+    <text x="624" y="206" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:21.612</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.5200; 0.5400; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.5200; 0.5400; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <rect x="0" y="222" width="2" height="32" rx="1" fill="#f87171"/>
+    <line x1="0" y1="254" x2="640" y2="254" stroke="rgba(30,41,59,0.5)"/>
+    <rect x="27" y="230.5" width="34" height="15" rx="3" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.3)"/>
+    <text x="44" y="238" font-size="9.6" font-weight="700" fill="#f87171" text-anchor="middle" dominant-baseline="central">ERR</text>
+    <text x="84" y="238" font-size="11" fill="#94a3b8">browser</text>
+    <text x="176" y="238" font-size="12" fill="#cbd5e1" class="sans">Unhandled rejection: TypeError in checkout flow</text>
+    <text x="624" y="238" font-size="11" fill="#475569" text-anchor="end" dominant-baseline="central" style="font-variant-numeric: tabular-nums">14:03:21.790</text>
+  </g>
+<g><animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.6000; 0.6200; 1" values="0; 0; 1; 1"/><animateTransform attributeName="transform" type="translate" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.6000; 0.6200; 1" values="0 6; 0 6; 0 0; 0 0"/>
+    <g>
+      <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1; 0.5; 1"/>
+      <rect x="142" y="258" width="356" height="24" rx="4" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.4)"/>
+      <circle cx="158" cy="270" r="3" fill="#f87171"/>
+      <text x="170" y="270" font-size="11" font-weight="600" fill="#f87171" dominant-baseline="central" class="sans">CASCADE DETECTED — root cause: POST /api/orders</text>
+    </g>
+  </g>
+
+  <rect y="286" width="640" height="32" fill="rgba(15,23,42,0.6)"/>
+  <line x1="0" y1="286" x2="640" y2="286" stroke="rgba(30,41,59,0.5)"/>
+  <circle cx="16" cy="302" r="3" fill="#34d399" opacity="0.6"><animate attributeName="opacity" dur="1.6s" repeatCount="indefinite" values="0.6; 0.3; 0.6"/></circle>
+  <text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">0 events</text>
+  <text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">1 event<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.0667; 0.0867; 0.1467; 0.1467; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">2 events<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.1467; 0.1667; 0.2400; 0.2400; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">3 events<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.2400; 0.2600; 0.3333; 0.3333; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">4 events<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.3333; 0.3533; 0.4267; 0.4267; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">5 events<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.4267; 0.4467; 0.5200; 0.5200; 1" values="0; 0; 1; 1; 0; 0"/></text>
+<text x="26" y="302" font-size="10.5" fill="#475569" dominant-baseline="central">6 events<animate attributeName="opacity" dur="7.5s" repeatCount="indefinite" keyTimes="0; 0.5200; 0.5400; 1" values="0; 0; 1; 1"/></text>
+
+  </g>
+</svg>
