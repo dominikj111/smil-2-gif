@@ -12,9 +12,9 @@ body {
 }
 
 header {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 1rem;
+  padding: 2rem 1.5rem 0.5rem;
 }
 
 header h1 {
@@ -27,6 +27,7 @@ header p {
   margin: 0;
   font-size: 0.85rem;
   color: #64748b;
+  line-height: 1.6;
 }
 
 header code {
@@ -38,10 +39,31 @@ header code {
   color: #94a3b8;
 }
 
+/* ── transport strip (shared demo clock) ─────────────────────────────── */
+
+.transport {
+  max-width: 1200px;
+  margin: 0.75rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.transport__t {
+  margin-left: 12px;
+  font-family: 'RobotoMono Nerd Font', 'DejaVu Sans Mono', monospace;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* ── gallery ──────────────────────────────────────────────────────────── */
+
 #diagrams {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -53,6 +75,16 @@ header code {
   font-weight: 600;
   color: #e2e8f0;
   font-family: 'RobotoMono Nerd Font', 'DejaVu Sans Mono', monospace;
+}
+
+.card__tag {
+  background: #1e293b;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .stage {
@@ -69,4 +101,158 @@ header code {
 .stage svg {
   max-width: 100%;
   height: auto;
+}
+
+/* mockups keep the library dark theme (Ocean Serenity) inside their stage */
+.stage--mockup {
+  background: var(--uc-color-background);
+  color: var(--uc-color-foreground);
+  padding: 0;
+  align-items: stretch;
+}
+
+.stage--mockup > * {
+  width: 100%;
+}
+
+/* ── isolated mode (what the exporter captures) ───────────────────────── */
+
+.isolated {
+  position: fixed;
+  inset: 0;
+  background: var(--uc-color-background);
+  color: var(--uc-color-foreground);
+  overflow: hidden;
+}
+
+.isolated-missing {
+  padding: 2rem;
+  color: #f87171;
+}
+
+/* ── chart-lab mockup ────────────────────────────────────────────────── */
+
+.chartlab {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  height: 100%;
+  padding: 18px 20px;
+}
+
+.chartlab__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chartlab__title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--uc-color-foreground);
+}
+
+.chartlab__subtitle {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--uc-color-muted-foreground);
+}
+
+.chartlab__subtitle code,
+.chartlab__t {
+  font-family: 'RobotoMono Nerd Font', 'DejaVu Sans Mono', monospace;
+  font-size: 0.78em;
+}
+
+.chartlab__transport {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chartlab__t {
+  margin-left: 10px;
+  color: var(--uc-color-muted-foreground);
+}
+
+.chartlab__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 14px;
+}
+
+.chartlab__controls {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.chartlab__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.chartlab__grid:has(> :only-child) { display: flex; }
+.chartlab__grid:has(> :nth-child(3)) { grid-template-columns: repeat(3, 1fr); }
+
+.chartlab__sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chartlab__slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.78rem;
+}
+
+.chartlab__slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.chartlab__slider-label {
+  color: var(--uc-color-muted-foreground);
+}
+
+.chartlab__slider-value {
+  color: var(--uc-color-foreground);
+  font-family: 'RobotoMono Nerd Font', 'DejaVu Sans Mono', monospace;
+  font-size: 0.78em;
+}
+
+.chartlab__slider input[type='range'] {
+  width: 100%;
+  accent-color: var(--uc-pill-hl);
+}
+
+.chartlab__chart {
+  flex: 1;
+  min-width: 0;
+  background: var(--uc-color-card);
+  border: 1px solid var(--uc-color-border);
+  border-radius: var(--uc-radius-md);
+  padding: 8px;
+  display: flex;
+}
+
+.chartlab__chart > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.chartlab__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }

@@ -4,11 +4,26 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
     "types": ["vite/client"],
     "strict": true,
     "noEmit": true,
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@ui-components-library/react/styles": [
+        "/development/ui-components-library/ui-components-library/packages/react/src/styles/index.css"
+      ],
+      "@ui-components-library/react": [
+        "/development/ui-components-library/ui-components-library/packages/react/src/index.ts"
+      ],
+      "@ui-components-library/shared": [
+        "/development/ui-components-library/ui-components-library/packages/shared/src/index.ts"
+      ],
+      "react": ["./node_modules/@types/react/index.d.ts"],
+      "react/jsx-runtime": ["./node_modules/@types/react/jsx-runtime.d.ts"],
+      "react-dom": ["./node_modules/@types/react-dom/index.d.ts"]
+    }
   },
   "include": ["src"]
 }

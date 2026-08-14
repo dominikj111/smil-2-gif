@@ -1,74 +1,129 @@
 # smil-2-gif
 
-Animated SVG diagrams (SMIL) → GIF/WebM/MP4. A tiny authoring pipeline for animated SVG diagrams:
+Animated mockup pipeline: **diagrams and web-page mockups → GIF/WebM/MP4**.
+One deterministic frame pipeline, two authoring front-ends:
 
 ```
-src/diagrams/<name>/gen.ts   TS generator  ── npm run gen ──►  src/diagrams/<name>/<name>.svg
-                                                                    │
-                                        ┌───────────────────────────┼───────────────────────────┐
-                                        ▼                           ▼                           ▼
-                        review in browser (npm run dev)   gifs/<name>.gif (npm run gif:<name>)   automated checks
+┌─ Authoring front-end #1: SMIL SVG diagrams ─────────────────────────────┐
+│ src/diagrams/<name>/gen.ts   TS generator ── npm run gen ──►  *.svg     │
+│                                   │                                     │
+│        review (npm run dev) ◄─────┴─────►  gifs/<name>.gif (npm run gif:<name>) │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ Authoring front-end #2: React mockups ─────────────────────────────────┐
+│ src/mockups/<name>/Mockup.tsx   real components (ui-components-library, │
+│                                  TanStack Charts, useDemoClock)          │
+│                                   │                                      │
+│        review (npm run dev) ◄─────┴─────► gifs/<name>.mp4/webm/gif       │
+│                                            (npm run video:<name>)        │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
-The canonical artifact is the **standalone SVG** (with SMIL animations). The same file is
-reviewed live in the browser and fed to the converter — no duplication.
+The canonical artifact of each mockup is the **React component itself** — the
+same code runs live in the browser (client review) and is captured frame-by-frame
+by the exporter (client deliverable). Nothing partially implemented leaks: the
+deliverables are finished media files.
 
 ## Prerequisites
 
 - Node ≥ 23.6 (native TS type-stripping is used by the generator runner)
 - `ffmpeg` on PATH
 - `gifsicle` on PATH (optional; the npm `gifsicle` devDependency provides it as
-  `node_modules/.bin/gifsicle`, which npm scripts can see)
+  `node_modules/.bin/gifsicle`)
 - Playwright Chromium: `npx playwright install chromium` (after `npm install`)
+- `ui-components-library` at `/development/ui-components-library` (consumed as
+  raw TS source via Vite aliases, like the library's own dev playground)
 
-## Diagrams
+## Diagrams (SMIL authoring)
 
 | Diagram | Source | Loop | Notes |
 |---------|--------|------|-------|
-| `hero-terminal` | `Hero.tsx` (`TerminalDemo`) | 7.5s | sequential log rows + cascade detection; row appear times from `STEP_DELAYS` |
-| `architecture` | `Architecture.tsx` | 12.5s | SurfLogs data-flow diagram; hover interactions converted to a timed showcase: default → Browser → Lambda → IoT → Hub → Worker → Sensor → App Server |
+| `hero-terminal` | `Hero.tsx` (`TerminalDemo`) | 7.5s | sequential log rows + cascade detection |
+| `architecture` | `Architecture.tsx` | 12.5s | SurfLogs data-flow diagram; hover interactions converted to a timed showcase |
 
-## Workflow
+Workflow:
 
-1. **Author** — edit `src/diagrams/<name>/gen.ts` to produce an SVG string via `generate()`.
-   Add `scripts` to `package.json` for convenience (`gif:<name>`).
-
-2. **Generate** — `npm run gen` writes `src/diagrams/<name>/<name>.svg` for every diagram.
-
-3. **Review** — `npm run dev` (Vite). `src/main.ts` auto-discovers all `*.svg` under
-   `src/diagrams/` and embeds them on a dark page; SMIL animations run live. Edit the
-   generator and the page hot-reloads.
-
-4. **Verify layout/timing** — `node scripts/check-hero.mjs` checks text overflow, cascade
-   fit, and per-row appear timing (fast, no GIF needed).
-
-5. **Export GIF** — `npm run gif:architecture` produces `gifs/architecture.gif`:
+1. **Author** — edit `src/diagrams/<name>/gen.ts` to produce an SVG string via
+   `generate()`. Add a `gif:<name>` script to `package.json`.
+2. **Generate** — `npm run gen` writes `src/diagrams/<name>/<name>.svg`.
+3. **Review** — `npm run dev` (Vite); SMIL animations run live.
+4. **Export** — `npm run gif:<name>`:
 
    ```bash
    node scripts/svg-to-gif.mjs input.svg output.gif [options]
    ```
 
-   Options: `--duration <sec>`, `--fps <n>`, `--width/--height <px>`, `--scheme`,
-   `--format gif|webm|mp4`, `--scale-strategy`, `--dpr <n>` (capture supersampling,
-   default 2), `--palette/--no-palette`, `--dither none|bayer|sierra2_4a` (GIF
-   dithering; `none` is smaller but bands gradients), `--no-gifsicle`,
-   `--preview <path> [--preview-at <sec>]` (dump one PNG frame for a fast check).
-   Defaults come from `svg-to-gif.config.json`, overridden by CLI flags.
+   Options: `--duration`, `--fps`, `--width/--height`, `--scheme`,
+   `--format gif|webm|mp4`, `--scale-strategy`, `--dpr`, `--palette/--no-palette`,
+   `--dither`, `--no-gifsicle`, `--preview <path> [--preview-at <sec>]`.
+   Defaults from `svg-to-gif.config.json`, overridden by CLI flags.
 
-   Size notes: the architecture GIF is ~2 MB at 24 fps — the moving dots and
-   pulsing rings change many pixels per frame, so GIF compression is limited.
-   Lower fps (15-20) or a smaller `--width` to shrink it.
+## Mockups (React authoring)
 
-6. **Verify playback** — `node scripts/playback-check.mjs` (hero) / `node scripts/playback-architecture.mjs` (architecture) play the GIF in Chromium and
-   assert the visible timeline (row appear times, cascade, loop reset / phase dimming).
+Author a real web page mockup as a React component in
+`src/mockups/<name>/Mockup.tsx`, built from `@ui-components-library/react`
+components, TanStack Charts, and `useDemoClock`. The dev page mounts every
+mockup in a gallery (plus an isolated full-window mode at `/?isolated=<name>`
+that the exporter drives).
 
-## How the converter works
+Export:
+
+```bash
+npm run video:chart-lab    # mp4 (primary client deliverable)
+npm run webm:chart-lab     # webm
+npm run gif:chart-lab      # gif — small loops only; UI churn makes GIFs huge
+node scripts/mockup-to-video.mjs --mockup chart-lab --duration 8 --fps 30 \
+  --width 1200 --height 720 --format mp4 --preview gifs/chart-lab.png
+```
+
+Options: `--mockup <name>`, `--duration`, `--fps`, `--width/--height`,
+`--scheme`, `--format`, `--out`, `--dpr`, `--preview`, `--preview-at`,
+`--port` (Vite dev port; ephemeral by default), `--url <url>` (reuse a running
+server), `--keep-frames <dir>` (debug), `--wait <ms>`.
+
+### How mockup capture works
+
+- The exporter starts an in-process Vite dev server and opens
+  `/?isolated=<mockup>` — only that mockup, full-window, `.dark` theme class.
+- It injects `window.__demoClock` **before** app scripts run. The library's
+  `useDemoClock` hook detects the bridge, hands it a driver, and stops its
+  `requestAnimationFrame` loop. The exporter then advances the timeline
+  deterministically with `driver.step(dt)` per frame — the exact analogue of
+  SMIL `svg.setCurrentTime()` in the diagram mode. Live browser mode uses the
+  same hook via rAF, so what you review is what you export.
+- After each step it settles (double rAF so React commits and the canvas
+  redraws), screenshots, and hands the PNG frames to the shared encoder.
+
+### useDemoClock (in ui-components-library)
+
+`useDemoClock({ duration, loop })` — a module-level, steppable demo clock. Every
+hook on the page shares one timeline; each maps the global phase onto its own
+`duration`. Transport controls via `useDemoClockTransport()` (play/pause/
+restart/speed). See the library playground page `/demo-clock`.
+
+### TanStack Charts
+
+`chart-lab` uses the Canvas surface (`@tanstack/charts/react/canvas`): marks
+(`lineY`/`areaY`/`barY`/`dot`) consume data, channels describe encodings, and
+scales come from compact subpaths (`@tanstack/charts/scales/*`). The definition
+is memoized and rebuilt only when captured data or visual policy changes
+(definition identity is the update boundary). Live-streamed data is passed
+directly — no tweening (motion would imply false continuity).
+
+## Shared encoder
+
+`scripts/lib/encoder.mjs` owns option parsing/validation, the deterministic
+frame-capture loop (progress + preview), and ffmpeg/gifsicle encoding for
+GIF/WebM/MP4. Both front-ends call it; new authoring modes just provide a
+different `perFrame(t)` timeline driver.
+
+## How the SMIL converter works
 
 - Loads the SVG into headless Chromium (Playwright) at native size with
   `deviceScaleFactor` for crisp text.
-- `svg.pauseAnimations()` freezes the SMIL timeline — this is **essential**. Without it
-  the timeline keeps playing while screenshots are taken, so each frame drifts forward
-  (the slow first frame drifts 0.5s+ and the loop wraps at the end).
+- `svg.pauseAnimations()` freezes the SMIL timeline — **essential**. Without it
+  the timeline keeps playing while screenshots are taken, so each frame drifts
+  forward (the slow first frame drifts 0.5s+ and the loop wraps at the end).
 - Per frame: `svg.setCurrentTime(i / fps)` → screenshot → ffmpeg encodes
   (palettegen + paletteuse for GIF), then `gifsicle -O3`.
 
@@ -87,21 +142,15 @@ reviewed live in the browser and fed to the converter — no duplication.
 ## Layout
 
 ```
-src/diagrams/<name>/gen.ts   generator (exports `generate(): string`)
-src/diagrams/<name>/<name>.svg   generated artifact (committed)
-scripts/gen-all.mjs          runs all generators
-scripts/svg-to-gif.mjs       Playwright + ffmpeg converter
-scripts/check-hero.mjs       layout/timing assertions for the hero-terminal diagram
-scripts/check-architecture.mjs   phase-by-phase opacity assertions for architecture
-scripts/playback-check.mjs   browser playback assertions for a hero GIF
-scripts/playback-architecture.mjs   browser playback assertions for the architecture GIF
-gifs/                        output (gitignored)
+src/diagrams/<name>/gen.ts          SMIL diagram generator (exports generate())
+src/diagrams/<name>/<name>.svg      generated artifact (committed)
+src/mockups/<name>/Mockup.tsx       React mockup (default export; isolated at ?isolated=<name>)
+src/main.tsx                        review page: diagram + mockup galleries, transport strip
+scripts/gen-all.mjs                 runs all generators
+scripts/svg-to-gif.mjs              SMIL authoring → frames → encoder
+scripts/mockup-to-video.mjs         React mockup authoring → frames → encoder
+scripts/lib/encoder.mjs             shared capture loop + ffmpeg/gifsicle encoding
+scripts/check-*.mjs                 layout/timing assertions per diagram
+scripts/playback-*.mjs              browser playback assertions per GIF
+gifs/                               output (gitignored)
 ```
-
-## Porting hover interactions (Architecture.tsx)
-
-The React diagram dims everything except the hovered zone (opacity helpers like
-`sourcePathOpacity`, `hubZoneOpacity`, ...). For the GIF these become a timed
-loop: `PHASES` in `gen.ts` lists `[phase, startTime]` pairs, and the `curve()`
-helper turns any `(phase) => value` function into a keyTimes/values animation
-with 0.25s fades at phase boundaries. Add a phase → the whole diagram follows.
