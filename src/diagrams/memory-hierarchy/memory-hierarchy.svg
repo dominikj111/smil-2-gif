@@ -250,23 +250,24 @@
     <text x="18" y="612" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE RESULTS — WHAT THE METHOD BUYS</text>
     
   <g>
-    <rect x="30" y="616" width="290" height="48" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="30" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <text x="50" y="640" fill="#fbbf24" font-size="18" font-weight="700">1.3B</text>
-    <text x="50" y="657" fill="#94a3b8" font-size="9.5">input tokens in 28 days</text>
+    <text x="50" y="654" fill="#94a3b8" font-size="9.5">input tokens in 28 days</text>
   </g>
 
   <g>
-    <rect x="342" y="616" width="290" height="48" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="342" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <text x="362" y="640" fill="#fbbf24" font-size="18" font-weight="700">98.8%</text>
-    <text x="362" y="657" fill="#94a3b8" font-size="9.5">served from provider cache</text>
+    <text x="362" y="654" fill="#94a3b8" font-size="9.5">served from provider cache</text>
   </g>
 
   <g>
-    <rect x="654" y="616" width="290" height="48" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="654" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <text x="674" y="640" fill="#fbbf24" font-size="18" font-weight="700">≈ $20 / month</text>
-    <text x="674" y="657" fill="#94a3b8" font-size="9.5">≈ 70¢ a day — full-time AI partner</text>
+    <text x="674" y="654" fill="#94a3b8" font-size="9.5">≈ 70¢ a day — full-time AI partner</text>
   </g>
-    <rect x="30" y="670" width="900" height="20" rx="8" fill="rgba(15,23,42,0.55)" stroke="#475569" stroke-width="1"/>
-    <text x="480" y="684" text-anchor="middle" fill="#94a3b8" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
+    <rect x="30" y="666" width="900" height="18" rx="9" fill="rgba(15,23,42,0.55)" stroke="#475569" stroke-width="1"/>
+    <circle cx="48" cy="675" r="3.5" fill="#fbbf24"/>
+    <text x="62" y="679" fill="#94a3b8" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
   </g>
 </svg>

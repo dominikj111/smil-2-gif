@@ -69,9 +69,9 @@ const CHIPS = [
   { x: 654, big: '≈ $20 / month', sub: '≈ 70¢ a day — full-time AI partner' },
 ]
 const CHIP_W = 290
-const CHIP_H = 48
+const CHIP_H = 42
 const CHIP_Y = 616
-const NOTE = { x: 30, y: 670, w: 900, h: 20 }
+const NOTE = { x: 30, y: 666, w: 900, h: 18 }
 
 const tag = (x: number, y: number, s: string) =>
   `<text x="${x}" y="${y}" fill="${C.faint}" font-size="9.5" letter-spacing="0.09em">${s}</text>`
@@ -240,7 +240,7 @@ function resultsZone(): string {
   <g>
     <rect x="${x}" y="${CHIP_Y}" width="${CHIP_W}" height="${CHIP_H}" rx="10" fill="${C.card}" stroke="${C.cardStroke}" stroke-width="1"/>
     <text x="${x + 20}" y="${CHIP_Y + 24}" fill="${C.res}" font-size="18" font-weight="700">${big}</text>
-    <text x="${x + 20}" y="${CHIP_Y + 41}" fill="${C.dim}" font-size="9.5">${sub}</text>
+    <text x="${x + 20}" y="${CHIP_Y + 38}" fill="${C.dim}" font-size="9.5">${sub}</text>
   </g>`
 
   return `
@@ -248,8 +248,9 @@ function resultsZone(): string {
     <rect x="${RESULTS.x}" y="${RESULTS.y}" width="${RESULTS.w}" height="${RESULTS.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
     ${tag(RESULTS.x + 8, RESULTS.y + 14, 'THE RESULTS — WHAT THE METHOD BUYS')}
     ${CHIPS.map((c) => chip(c.x, c.big, c.sub)).join('\n')}
-    <rect x="${NOTE.x}" y="${NOTE.y}" width="${NOTE.w}" height="${NOTE.h}" rx="8" fill="rgba(15,23,42,0.55)" stroke="${C.faint}" stroke-width="1"/>
-    <text x="${NOTE.x + NOTE.w / 2}" y="${NOTE.y + 14}" text-anchor="middle" fill="${C.dim}" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
+    <rect x="${NOTE.x}" y="${NOTE.y}" width="${NOTE.w}" height="${NOTE.h}" rx="9" fill="rgba(15,23,42,0.55)" stroke="${C.faint}" stroke-width="1"/>
+    <circle cx="${NOTE.x + 18}" cy="${NOTE.y + NOTE.h / 2}" r="3.5" fill="${C.res}"/>
+    <text x="${NOTE.x + 32}" y="${NOTE.y + 13}" fill="${C.dim}" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
   </g>`
 }
 
