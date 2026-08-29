@@ -40,6 +40,7 @@ deliverables are finished media files.
 |---------|--------|------|-------|
 | `hero-terminal` | `Hero.tsx` (`TerminalDemo`) | 7.5s | sequential log rows + cascade detection |
 | `architecture` | `Architecture.tsx` | 12.5s | SurfLogs data-flow diagram; hover interactions converted to a timed showcase |
+| `memory-hierarchy` | the memory-hierarchy method | 12s | generic infographic: L3 · ICM files (AGENTS.md + workspaces) → chat session → LLM provider with L1/L2 behind it; memory pipeline with two paths to the converging mirror (note-taking feeds only the project log); token/cache economics; static (all zones readable at once) with ambient flow dots |
 
 Workflow:
 
