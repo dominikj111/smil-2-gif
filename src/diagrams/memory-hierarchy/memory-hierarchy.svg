@@ -6,11 +6,11 @@
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
-    <path id="p-pl2m" d="M 652 424 C 622 426 614 442 590 444" fill="none"/>
-    <path id="p-sd2m" d="M 650 470 C 622 472 614 454 590 452" fill="none"/>
-    <path id="p-log-down" d="M 160 460 L 160 526" fill="none"/>
-    <path id="p-mirror-down" d="M 470 460 L 470 526" fill="none"/>
-    <path id="p-back" d="M 160 526 L 758 526" fill="none"/>
+    <path id="p-pl2m" d="M 650 410 C 624 412 616 444 590 448" fill="none"/>
+    <path id="p-sd2m" d="M 650 500 C 624 502 616 462 590 460" fill="none"/>
+    <path id="p-log-down" d="M 160 476 L 160 528" fill="none"/>
+    <path id="p-mirror-down" d="M 470 476 L 470 528" fill="none"/>
+    <path id="p-back" d="M 160 528 L 758 528" fill="none"/>
     <filter id="glow-amber" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -128,7 +128,7 @@
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sp"/></animateMotion>
   </circle>
   
-  <path d="M 652 424 C 622 426 614 442 590 444" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 650 410 C 624 412 616 444 590 448" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
     <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite"><mpath href="#p-pl2m"/></animateMotion>
@@ -138,7 +138,7 @@
     <animateMotion dur="1.5s" begin="0.75s" repeatCount="indefinite"><mpath href="#p-pl2m"/></animateMotion>
   </circle>
   
-  <path d="M 650 470 C 622 472 614 454 590 452" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 650 500 C 624 502 616 462 590 460" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
     <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-sd2m"/></animateMotion>
@@ -148,7 +148,7 @@
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sd2m"/></animateMotion>
   </circle>
   
-  <path d="M 160 460 L 160 526" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 160 476 L 160 528" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
     <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-log-down"/></animateMotion>
@@ -158,7 +158,7 @@
     <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-log-down"/></animateMotion>
   </circle>
   
-  <path d="M 470 460 L 470 526" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 470 476 L 470 528" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
     <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-mirror-down"/></animateMotion>
@@ -168,7 +168,7 @@
     <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-mirror-down"/></animateMotion>
   </circle>
   
-  <path d="M 160 526 L 758 526" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 160 528 L 758 528" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
     <animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#p-back"/></animateMotion>
@@ -177,52 +177,61 @@
   <circle r="2" fill="#f77f00" opacity="0.45">
     <animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#p-back"/></animateMotion>
   </circle>
-  <path d="M 752 521 L 764 526 L 752 531 Z" fill="rgba(247,127,0,0.45)"/>
+  <path d="M 752 523 L 764 528 L 752 533 Z" fill="rgba(247,127,0,0.45)"/>
   
   <g>
     <rect x="10" y="370" width="940" height="176" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
     <text x="18" y="384" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE MEMORY PIPELINE — TWO PATHS: THE MIRROR AND THE FILES</text>
     
   <g>
-    <rect x="30" y="420" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="30" y="420" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="44" y="436" fill="white" font-size="12.5" font-weight="700">note-taking</text>
-    <text x="44" y="451" fill="#94a3b8" font-size="10">logs the current focus</text>
-    <rect x="196" y="423" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
-    <text x="240" y="436" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
+    <rect x="30" y="436" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="30" y="436" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="44" y="452" fill="white" font-size="12.5" font-weight="700">note-taking</text>
+    <text x="44" y="467" fill="#94a3b8" font-size="10">logs the current focus</text>
+    <rect x="196" y="439" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
+    <text x="240" y="452" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
   </g>
-    <rect x="196" y="444" width="88" height="16" rx="8" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
-    <text x="240" y="455" text-anchor="middle" fill="#f77f00" font-size="8.5" font-weight="600">project log</text>
+    <rect x="196" y="459" width="88" height="15" rx="7.5" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
+    <text x="240" y="470" text-anchor="middle" fill="#f77f00" font-size="8.5" font-weight="600">project log</text>
     
   <g>
-    <rect x="650" y="396" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="650" y="396" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="412" fill="white" font-size="12.5" font-weight="700">profile learning</text>
-    <text x="664" y="427" fill="#94a3b8" font-size="10">live — the mirror</text>
-    <rect x="816" y="399" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
-    <text x="860" y="412" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
+    <rect x="650" y="392" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="650" y="392" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="664" y="408" fill="white" font-size="12.5" font-weight="700">profile learning</text>
+    <text x="664" y="423" fill="#94a3b8" font-size="10">live — the mirror</text>
+    <rect x="816" y="395" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
+    <text x="860" y="408" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
   </g>
     
   <g>
-    <rect x="650" y="444" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="650" y="444" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="460" fill="white" font-size="12.5" font-weight="700">session distillation</text>
-    <text x="664" y="475" fill="#94a3b8" font-size="10">weekly — feeds the mirror</text>
-    <rect x="816" y="447" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
-    <text x="860" y="460" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual · weekly</text>
+    <rect x="650" y="436" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="650" y="436" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="664" y="452" fill="white" font-size="12.5" font-weight="700">personas aggregation</text>
+    <text x="664" y="467" fill="#94a3b8" font-size="10">consolidates the personas</text>
+    <rect x="816" y="439" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
+    <text x="860" y="452" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual · weekly</text>
+  </g>
+    
+  <g>
+    <rect x="650" y="480" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="650" y="480" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="664" y="496" fill="white" font-size="12.5" font-weight="700">session distillation</text>
+    <text x="664" y="511" fill="#94a3b8" font-size="10">weekly — feeds the mirror</text>
+    <rect x="816" y="483" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
+    <text x="860" y="496" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual · weekly</text>
   </g>
     <g>
-      <rect x="350" y="420" width="240" height="40" rx="9" fill="#1e293b" stroke="#34d39988" stroke-width="1"/>
-      <rect x="350" y="420" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.8"/>
-      <text x="470" y="437" text-anchor="middle" fill="#34d399" font-size="13" font-weight="700">CONVERGING MIRROR</text>
-      <text x="470" y="452" text-anchor="middle" fill="#94a3b8" font-size="9.5">an accurate model of how you think</text>
+      <rect x="350" y="436" width="240" height="40" rx="9" fill="#1e293b" stroke="#34d39988" stroke-width="1"/>
+      <rect x="350" y="436" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.8"/>
+      <text x="470" y="453" text-anchor="middle" fill="#34d399" font-size="13" font-weight="700">CONVERGING MIRROR</text>
+      <text x="470" y="468" text-anchor="middle" fill="#94a3b8" font-size="9.5">an accurate model of how you think</text>
     </g>
     <g>
-      <rect x="760" y="512" width="180" height="28" rx="9" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
-      <rect x="760" y="512" width="4" height="28" rx="2" fill="#f77f00" fill-opacity="0.8"/>
-      <text x="850" y="531" text-anchor="middle" fill="#f77f00" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
+      <rect x="760" y="522" width="180" height="24" rx="9" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
+      <rect x="760" y="522" width="4" height="24" rx="2" fill="#f77f00" fill-opacity="0.8"/>
+      <text x="850" y="539" text-anchor="middle" fill="#f77f00" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
     </g>
-    <text x="938" y="384" text-anchor="end" fill="#475569" font-size="9.5">note-taking → project log · profile learning + session distillation → mirror · all of it lives in the files</text>
+    <text x="938" y="384" text-anchor="end" fill="#475569" font-size="9.5">note-taking → project log · profile learning + personas + session distillation → mirror · all of it lives in the files</text>
   </g>
   
   <g>

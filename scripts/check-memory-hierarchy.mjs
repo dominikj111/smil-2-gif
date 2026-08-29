@@ -49,6 +49,7 @@ const labels = [
   'L2 · fine-tuning',
   'note-taking',
   'profile learning',
+  'personas aggregation',
   'session distillation',
   'CONVERGING MIRROR',
   '1.3B',
@@ -74,11 +75,11 @@ const seek = async (t) => {
     const zones = Object.fromEntries(labels.map((l) => [l, op(gOf(l))]))
     zones['flow-l3s'] = pathOp('M 284 185 L 312 185')
     zones['flow-sp'] = pathOp('M 600 185 L 656 185')
-    zones['flow-pl2m'] = pathOp('M 652 424 C 622 426 614 442 590 444')
-    zones['flow-sd2m'] = pathOp('M 650 470 C 622 472 614 454 590 452')
-    zones['flow-logdown'] = pathOp('M 160 460 L 160 526')
-    zones['flow-mirrordown'] = pathOp('M 470 460 L 470 526')
-    zones['flow-back'] = pathOp('M 160 526 L 758 526')
+    zones['flow-pl2m'] = pathOp('M 650 410 C 624 412 616 444 590 448')
+    zones['flow-sd2m'] = pathOp('M 650 500 C 624 502 616 462 590 460')
+    zones['flow-logdown'] = pathOp('M 160 476 L 160 528')
+    zones['flow-mirrordown'] = pathOp('M 470 476 L 470 528')
+    zones['flow-back'] = pathOp('M 160 528 L 758 528')
     return zones
   }, labels)
 }

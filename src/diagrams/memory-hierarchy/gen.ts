@@ -55,12 +55,13 @@ const L1 = { x: 642, y: 108, w: 290, h: 46 } // behind the provider
 const L2 = { x: 642, y: 242, w: 290, h: 46 } // behind the provider
 const PROVIDER = { x: 656, y: 150, w: 262, h: 96 }
 const PIPELINE = { x: 10, y: 370, w: 940, h: 176 } // note-taking/project-log left col · mirror middle · right col of learners
-const NOTE_TAKING = { x: 30, y: 420, w: 260, h: 40 } // left col, aligned with the mirror
-const PROJ_TAG = { x: 196, y: 444, w: 88, h: 16 } // "project log" pill under the auto tag, inside note-taking
-const PROFILE = { x: 650, y: 396, w: 260, h: 40 } // right col row1
-const DISTILL = { x: 650, y: 444, w: 260, h: 40 } // right col row2
-const MIRROR = { x: 350, y: 420, w: 240, h: 40 } // centered between profile learning & session distillation
-const L3_LABEL = { x: 760, y: 512, w: 180, h: 28 } // the return line's target
+const NOTE_TAKING = { x: 30, y: 436, w: 260, h: 40 } // left col, aligned with the mirror
+const PROJ_TAG = { x: 196, y: 459, w: 88, h: 15 } // "project log" pill under the auto tag, inside note-taking
+const PROFILE = { x: 650, y: 392, w: 260, h: 40 } // right col row1
+const PERSONAS = { x: 650, y: 436, w: 260, h: 40 } // right col row2 — the middle card
+const DISTILL = { x: 650, y: 480, w: 260, h: 40 } // right col row3
+const MIRROR = { x: 350, y: 436, w: 240, h: 40 } // aligned with the middle card (personas)
+const L3_LABEL = { x: 760, y: 522, w: 180, h: 24 } // the return line's target
 const RESULTS = { x: 10, y: 552, w: 940, h: 88 }
 const CHIPS = [
   { x: 30, big: '1.3B', sub: 'input tokens in 28 days' },
@@ -183,17 +184,17 @@ function flows(): string {
   ${flowDots('p-l3s', C.icm, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-sp', 'M 600 185 L 656 185', C.res, 0.55)}
   ${flowDots('p-sp', C.res, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-pl2m', 'M 652 424 C 622 426 614 442 590 444', C.pipe, 0.55)}
+  ${flowPath('p-pl2m', 'M 650 410 C 624 412 616 444 590 448', C.pipe, 0.55)}
   ${flowDots('p-pl2m', C.pipe, 0.55, 1.5, 2.5, [0, 0.75])}
-  ${flowPath('p-sd2m', 'M 650 470 C 622 472 614 454 590 452', C.pipe, 0.55)}
+  ${flowPath('p-sd2m', 'M 650 500 C 624 502 616 462 590 460', C.pipe, 0.55)}
   ${flowDots('p-sd2m', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-log-down', 'M 160 460 L 160 526', C.icm, 0.45)}
+  ${flowPath('p-log-down', 'M 160 476 L 160 528', C.icm, 0.45)}
   ${flowDots('p-log-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
-  ${flowPath('p-mirror-down', 'M 470 460 L 470 526', C.icm, 0.45)}
+  ${flowPath('p-mirror-down', 'M 470 476 L 470 528', C.icm, 0.45)}
   ${flowDots('p-mirror-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
-  ${flowPath('p-back', 'M 160 526 L 758 526', C.icm, 0.45)}
+  ${flowPath('p-back', 'M 160 528 L 758 528', C.icm, 0.45)}
   ${flowDots('p-back', C.icm, 0.45, 2.4, 2, [0, 1.2])}
-  <path d="M 752 521 L 764 526 L 752 531 Z" fill="rgba(247,127,0,0.45)"/>`
+  <path d="M 752 523 L 764 528 L 752 533 Z" fill="rgba(247,127,0,0.45)"/>`
 }
 
 function pipelineZone(): string {
@@ -212,9 +213,10 @@ function pipelineZone(): string {
     <rect x="${PIPELINE.x}" y="${PIPELINE.y}" width="${PIPELINE.w}" height="${PIPELINE.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
     ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — TWO PATHS: THE MIRROR AND THE FILES')}
     ${skillCard(NOTE_TAKING.x, NOTE_TAKING.y, 'note-taking', 'logs the current focus', 'auto · in-session', C.pipe)}
-    <rect x="${PROJ_TAG.x}" y="${PROJ_TAG.y}" width="${PROJ_TAG.w}" height="${PROJ_TAG.h}" rx="8" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
-    <text x="240" y="455" text-anchor="middle" fill="${C.icm}" font-size="8.5" font-weight="600">project log</text>
+    <rect x="${PROJ_TAG.x}" y="${PROJ_TAG.y}" width="${PROJ_TAG.w}" height="${PROJ_TAG.h}" rx="7.5" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
+    <text x="240" y="470" text-anchor="middle" fill="${C.icm}" font-size="8.5" font-weight="600">project log</text>
     ${skillCard(PROFILE.x, PROFILE.y, 'profile learning', 'live — the mirror', 'auto · in-session', C.pipe)}
+    ${skillCard(PERSONAS.x, PERSONAS.y, 'personas aggregation', 'consolidates the personas', 'manual · weekly', C.res)}
     ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'weekly — feeds the mirror', 'manual · weekly', C.res)}
     <g>
       <rect x="${MIRROR.x}" y="${MIRROR.y}" width="${MIRROR.w}" height="${MIRROR.h}" rx="9" fill="${C.card}" stroke="${C.pipe}88" stroke-width="1"/>
@@ -225,9 +227,9 @@ function pipelineZone(): string {
     <g>
       <rect x="${L3_LABEL.x}" y="${L3_LABEL.y}" width="${L3_LABEL.w}" height="${L3_LABEL.h}" rx="9" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
       <rect x="${L3_LABEL.x}" y="${L3_LABEL.y}" width="4" height="${L3_LABEL.h}" rx="2" fill="${C.icm}" fill-opacity="0.8"/>
-      <text x="${L3_LABEL.x + L3_LABEL.w / 2}" y="${L3_LABEL.y + 19}" text-anchor="middle" fill="${C.icm}" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
+      <text x="${L3_LABEL.x + L3_LABEL.w / 2}" y="${L3_LABEL.y + 17}" text-anchor="middle" fill="${C.icm}" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
     </g>
-    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">note-taking → project log · profile learning + session distillation → mirror · all of it lives in the files</text>
+    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">note-taking → project log · profile learning + personas + session distillation → mirror · all of it lives in the files</text>
   </g>`
 }
 
@@ -259,11 +261,11 @@ export function generate(): string {
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
-    <path id="p-pl2m" d="M 652 424 C 622 426 614 442 590 444" fill="none"/>
-    <path id="p-sd2m" d="M 650 470 C 622 472 614 454 590 452" fill="none"/>
-    <path id="p-log-down" d="M 160 460 L 160 526" fill="none"/>
-    <path id="p-mirror-down" d="M 470 460 L 470 526" fill="none"/>
-    <path id="p-back" d="M 160 526 L 758 526" fill="none"/>
+    <path id="p-pl2m" d="M 650 410 C 624 412 616 444 590 448" fill="none"/>
+    <path id="p-sd2m" d="M 650 500 C 624 502 616 462 590 460" fill="none"/>
+    <path id="p-log-down" d="M 160 476 L 160 528" fill="none"/>
+    <path id="p-mirror-down" d="M 470 476 L 470 528" fill="none"/>
+    <path id="p-back" d="M 160 528 L 758 528" fill="none"/>
     <filter id="glow-amber" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
