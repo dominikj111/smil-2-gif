@@ -14,7 +14,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;display:flex;align-items:cen
 </style></head><body>${svg}</body></html>`
 
 const W = 960
-const H = 640
+const H = 690
 const browser = await chromium.launch()
 const page = await browser.newPage({ viewport: { width: W, height: H } })
 await page.setContent(html, { waitUntil: 'load' })
@@ -75,11 +75,12 @@ const seek = async (t) => {
     const zones = Object.fromEntries(labels.map((l) => [l, op(gOf(l))]))
     zones['flow-l3s'] = pathOp('M 284 185 L 312 185')
     zones['flow-sp'] = pathOp('M 600 185 L 656 185')
-    zones['flow-pl2m'] = pathOp('M 650 410 C 624 412 616 444 590 448')
-    zones['flow-sd2m'] = pathOp('M 650 500 C 624 502 616 462 590 460')
-    zones['flow-logdown'] = pathOp('M 160 476 L 160 528')
-    zones['flow-mirrordown'] = pathOp('M 470 476 L 470 528')
-    zones['flow-back'] = pathOp('M 160 528 L 758 528')
+    zones['flow-pl2m'] = pathOp('M 650 414 C 624 416 616 446 590 448')
+    zones['flow-pa2m'] = pathOp('M 650 464 L 590 464')
+    zones['flow-sd2m'] = pathOp('M 650 512 C 624 514 616 482 590 480')
+    zones['flow-logdown'] = pathOp('M 160 484 L 160 556')
+    zones['flow-mirrordown'] = pathOp('M 470 484 L 470 556')
+    zones['flow-back'] = pathOp('M 160 556 L 758 556')
     return zones
   }, labels)
 }
@@ -88,7 +89,7 @@ const times = [0.2, 3, 6, 9, 12, 13.5]
 for (const t of times) {
   const p = await seek(t)
   const failed = labels.filter((l) => !(Math.abs(p[l] - 1) <= 0.05)).map((l) => `${l}=${p[l].toFixed(2)}`)
-  const flowExpect = { 'flow-l3s': 0.55, 'flow-sp': 0.55, 'flow-pl2m': 0.55, 'flow-sd2m': 0.55, 'flow-logdown': 0.45, 'flow-mirrordown': 0.45, 'flow-back': 0.45 }
+  const flowExpect = { 'flow-l3s': 0.55, 'flow-sp': 0.55, 'flow-pl2m': 0.55, 'flow-pa2m': 0.55, 'flow-sd2m': 0.55, 'flow-logdown': 0.45, 'flow-mirrordown': 0.45, 'flow-back': 0.45 }
   for (const [k, v] of Object.entries(flowExpect)) {
     if (!(Math.abs(p[k] - v) <= 0.05)) failed.push(`${k}=${p[k].toFixed(2)}(exp ${v})`)
   }
