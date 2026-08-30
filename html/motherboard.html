@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE MOTHERBOARD — the memory hierarchy, reshaped</title>
+<style>
+  :root {
+    --pcb:#081511; --pcb2:#0a1f18; --chip:#0f2a21; --chipline:#235544; --trace:#3ddc97;
+    --text:#d7e6df; --dim:#8fb3a6; --faint:#4d6b5f;
+    --amber:#fbbf24; --orange:#f77f00; --blue:#60a5fa; --green:#34d399; --violet:#a78bfa; --slate:#94a3b8;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#020617; color:var(--text); font-family:'DejaVu Sans',-apple-system,'Segoe UI',Arial,sans-serif;
+         padding:30px 16px 70px; display:flex; flex-direction:column; align-items:center; }
+  .wrap { width:100%; max-width:940px; }
+  h1 { font-size:20px; font-weight:700; letter-spacing:.02em; }
+  .sub { color:var(--dim); font-size:12px; margin-top:5px; line-height:1.6; }
+
+  .pcb { margin-top:22px; background:var(--pcb); border:2px solid #17382c; border-radius:20px; padding:34px 26px 28px;
+         position:relative; overflow:hidden;
+         background-image:linear-gradient(rgba(61,220,151,.045) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(61,220,151,.045) 1px, transparent 1px);
+         background-size:24px 24px; }
+
+  .main { display:flex; flex-direction:row; align-items:flex-start; justify-content:center; gap:10px; }
+  .lcol { display:flex; flex-direction:column; align-items:center; }
+  .rcol { display:flex; flex-direction:column; align-items:center; }
+  .memwrap { margin-top:15px; width:150px; flex:none; display:flex; align-items:center; }
+
+  /* chip = IC */
+  .chip { position:relative; background:var(--chip); border:1px solid var(--chipline); border-radius:11px;
+          padding:12px 18px; min-width:150px; text-align:center; }
+  .chip::before, .chip::after { content:''; position:absolute; top:10px; bottom:10px; width:4px;
+          background:repeating-linear-gradient(to bottom, var(--pin,#3ddc97) 0 4px, transparent 4px 8px); opacity:.85; }
+  .chip::before { left:-7px; } .chip::after { right:-7px; }
+  .chip .n { font-size:12.5px; font-weight:700; letter-spacing:.02em; }
+  .chip .s { font-size:9px; color:var(--dim); margin-top:3px; line-height:1.45; }
+  .cpu { border-color:rgba(251,191,36,.55); --pin:var(--amber); } .cpu .n { color:var(--amber); }
+  .nb  { border-color:rgba(167,139,250,.5); --pin:var(--violet); } .nb .n { color:var(--violet); }
+  .drive { border-color:rgba(247,127,0,.6); --pin:var(--orange); } .drive .n { color:var(--orange); }
+
+  /* RAM — the memory container: everything currently running, cells stacked vertically */
+  .ram { width:210px; border-color:rgba(96,165,250,.5); --pin:var(--blue); padding:14px 16px; }
+  .ram .n { color:var(--blue); }
+  .ram .cells { display:flex; flex-direction:column; gap:10px; margin-top:11px; }
+  .ram .cell { border-radius:9px; padding:10px 12px; text-align:center; background:#0c241c; border:1px solid #1c4637; }
+  .cell .n { font-size:10.5px; font-weight:700; }
+  .cell .s { font-size:8.5px; color:var(--dim); margin-top:2px; line-height:1.4; }
+  .cell.linker .n { color:var(--green); } .cell.chat .n { color:var(--blue); } .cell.jigsaw .n { color:var(--green); }
+
+  /* two-line horizontal bus — line A dots →, line B dots ←, dashed */
+  .bus-h { position:relative; width:100%; height:46px; align-self:center; }
+  .bus-h .ln { position:absolute; left:0; right:0; height:2px; opacity:.55; }
+  .bus-h .ln.a { top:12px; } .bus-h .ln.b { top:30px; }
+  .bus-h .ln.a { background:repeating-linear-gradient(90deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-h .ln.b { background:repeating-linear-gradient(90deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-h .dot { position:absolute; width:6px; height:6px; border-radius:50%; background:var(--bc,#3ddc97); opacity:0; }
+  .bus-h .dot.a, .bus-h .dot.a2 { top:10px; animation:goRight 2s linear infinite; }
+  .bus-h .dot.a2 { animation-delay:1s; }
+  .bus-h .dot.b, .bus-h .dot.b2 { top:28px; animation:goLeft 2s linear infinite; }
+  .bus-h .dot.b2 { animation-delay:1s; }
+  @keyframes goRight { 0%{left:0;opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{left:calc(100% - 6px);opacity:0} }
+  @keyframes goLeft  { 0%{left:calc(100% - 6px);opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{left:0;opacity:0} }
+  .bus-h .lbl { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--pcb);
+                padding:1px 8px; font-size:8.5px; letter-spacing:.06em; color:var(--dim); white-space:nowrap; z-index:1; }
+
+  /* two-line vertical bus — line A dots ↓, line B dots ↑, dashed, chip-edge to chip-edge */
+  .bus-v { position:relative; width:100%; height:46px; }
+  .bus-v .ln { position:absolute; top:0; bottom:0; width:2px; opacity:.55; }
+  .bus-v .ln.a { left:calc(50% - 7px); } .bus-v .ln.b { left:calc(50% + 5px); }
+  .bus-v .ln.a { background:repeating-linear-gradient(180deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-v .ln.b { background:repeating-linear-gradient(180deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-v .dot { position:absolute; width:6px; height:6px; border-radius:50%; background:var(--bc,#3ddc97); opacity:0; margin-left:-3px; }
+  .bus-v .dot.a, .bus-v .dot.a2 { left:calc(50% - 7px); animation:goDown 2s linear infinite; }
+  .bus-v .dot.a2 { animation-delay:1s; }
+  .bus-v .dot.b, .bus-v .dot.b2 { left:calc(50% + 5px); animation:goUp 2s linear infinite; }
+  .bus-v .dot.b2 { animation-delay:1s; }
+  @keyframes goDown { 0%{top:0;opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{top:calc(100% - 6px);opacity:0} }
+  @keyframes goUp   { 0%{top:calc(100% - 6px);opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{top:0;opacity:0} }
+  .bus-v .lbl { position:absolute; left:calc(50% + 12px); top:50%; transform:translateY(-50%);
+                font-size:8.5px; letter-spacing:.06em; color:var(--dim); white-space:nowrap; z-index:1; }
+
+  /* drive split */
+  .drive { width:100%; max-width:250px; padding:14px 16px; }
+  .drive .split { display:flex; gap:12px; margin-top:10px; }
+  .drive .part { flex:1; border-radius:9px; padding:10px 12px; text-align:center; background:#0c241c; border:1px solid #1c4637; }
+  .part.swap .n { color:var(--slate); } .part.storage .n { color:var(--orange); }
+  .part .n { font-size:11px; font-weight:700; }
+  .part .s { font-size:8.5px; color:var(--dim); margin-top:2px; line-height:1.4; }
+
+  .note { margin-top:20px; background:rgba(15,23,42,.55); border:1px solid #2d3f55; border-radius:10px;
+          padding:12px 16px; color:var(--dim); font-size:10.5px; line-height:1.7; }
+  .note b { color:var(--text); }
+  .note .hl { color:var(--green); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>THE MOTHERBOARD — the memory hierarchy, reshaped as a board</h1>
+  <div class="sub">CPU and RAM on the same row — CPU connects <b style="color:#60a5fa">both directions</b>: to RAM (memory bus) and down to routing (NB) ·
+  RAM holds the linker · chat session · JigsawFlow (what's on the monitor) · every bus is two lines, dots one way each</div>
+
+  <div class="pcb">
+    <div class="main">
+
+      <!-- left column: CPU → routing → drive -->
+      <div class="lcol">
+        <div class="chip cpu" style="width:200px"><div class="n">CPU — LLM provider</div><div class="s">L1/L2 = firmware (weights) · L3 = provider prefix-cache · prompt = task · pi.dev client</div></div>
+
+        <div class="bus-v" style="--bc:var(--violet)">
+          <span class="ln a"></span><span class="ln b"></span>
+          <span class="dot a"></span><span class="dot a2"></span><span class="dot b"></span><span class="dot b2"></span>
+          <span class="lbl">routing bus · CPU ⇄ NB</span>
+        </div>
+
+        <div class="chip nb" style="width:200px"><div class="n">NORTH BRIDGE — routing</div><div class="s">the router · tool executor · mediates all slow I/O (bash · file I/O · git · web) · never the memory path</div></div>
+
+        <div class="bus-v" style="--bc:var(--orange)">
+          <span class="ln a"></span><span class="ln b"></span>
+          <span class="dot a"></span><span class="dot a2"></span><span class="dot b"></span><span class="dot b2"></span>
+          <span class="lbl">storage bus · page-in ⇄ write-back</span>
+        </div>
+
+        <div class="chip drive">
+          <div class="n">DRIVE — the ICM files</div>
+          <div class="s">source of truth · persistent · private · "you control only layer 3"</div>
+          <div class="split">
+            <div class="part swap"><div class="n">SWAP</div><div class="s">transcripts · resume markers — cold reloads</div></div>
+            <div class="part storage"><div class="n">STORAGE</div><div class="s">the physical files — paged into RAM, written back on distillation</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- memory bus: CPU ⇄ RAM (two lines, both directions) -->
+      <div class="memwrap">
+        <div class="bus-h" style="--bc:var(--blue)">
+          <span class="ln a"></span><span class="ln b"></span>
+          <span class="dot a"></span><span class="dot a2"></span><span class="dot b"></span><span class="dot b2"></span>
+          <span class="lbl">memory bus · direct · CPU ⇄ RAM</span>
+        </div>
+      </div>
+
+      <!-- right column: RAM — same row as CPU, cells stacked vertically -->
+      <div class="rcol">
+        <div class="chip ram">
+          <div class="n">RAM — everything currently running</div>
+          <div class="s">volatile · what you see on the monitor lives here · evaporates after distillation</div>
+          <div class="cells">
+            <div class="cell linker"><div class="n">LINKER</div><div class="s">context assembly — a running app (mwp) · fast context maps</div></div>
+            <div class="cell chat"><div class="n">CHAT SESSION</div><div class="s">the conversation · current context of focus</div></div>
+            <div class="cell jigsaw"><div class="n">JIGSAWFLOW</div><div class="s">the composed app · capability registry → what's on screen</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Design choices:</b> the CPU and RAM sit on the <span class="hl">same row</span> — the memory bus
+    connects them directly (no bridge in between). The CPU drives <span class="hl">both directions</span>:
+    a bidirectional two-line bus to RAM, and a bidirectional two-line routing bus down to the
+    <span class="hl">north bridge (routing)</span>, which mediates the drive (no south bridge). RAM holds
+    everything currently running, stacked vertically: the <b>linker</b> (context assembly, a running app),
+    the <b>chat session</b>, and the <b>JigsawFlow-composed app</b> — what the monitor shows is RAM, as in a
+    real machine. Every bus is two lines, dots flowing one way each.
+  </div>
+</div>
+</body>
+</html>

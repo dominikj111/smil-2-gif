@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE CONTEXT LINKER — the next projection</title>
+<style>
+  :root {
+    --bg:#020617; --card:#1e293b; --card-soft:rgba(15,23,42,.55);
+    --line:#334155; --text:#e2e8f0; --dim:#94a3b8; --faint:#475569;
+    --amber:#fbbf24; --orange:#f77f00; --blue:#60a5fa; --green:#34d399; --violet:#a78bfa;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'DejaVu Sans',-apple-system,'Segoe UI',Arial,sans-serif;
+         padding:30px 16px 70px; display:flex; flex-direction:column; align-items:center; }
+  .wrap { width:100%; max-width:880px; }
+  h1 { font-size:20px; font-weight:700; letter-spacing:.02em; }
+  .sub { color:var(--dim); font-size:12px; margin-top:5px; }
+
+  .grid { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; margin-top:22px; align-items:stretch; }
+  @media (max-width:760px){ .grid{ grid-template-columns:1fr; } .grid .mid{ transform:none; } }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:15px 17px; position:relative; overflow:hidden; }
+  .panel::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; }
+  .in::before { background:var(--orange); } .pass::before { background:var(--amber); } .out::before { background:var(--green); }
+  .ph { font-size:10px; letter-spacing:.09em; color:var(--faint); }
+  .pt { font-size:13px; font-weight:700; margin-top:3px; }
+  .pl { color:var(--dim); font-size:10.5px; margin-top:2px; }
+  .item { margin-top:9px; font-size:11px; line-height:1.45; }
+  .item b { color:var(--text); }
+  .item .k { color:var(--amber); font-weight:700; }
+  .item .d { color:var(--dim); }
+  .mid { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; color:var(--amber); }
+  .mid .cap { writing-mode:vertical-rl; transform:rotate(180deg); font-size:10px; letter-spacing:.14em; color:var(--faint); }
+  .mid .arr { font-size:26px; line-height:1; }
+
+  .pass-steps { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .step { display:flex; align-items:baseline; gap:10px; border-bottom:1px dashed #2d3f55; padding-bottom:7px; }
+  .step:last-child{ border-bottom:none; padding-bottom:0; }
+  .step .k { color:var(--amber); font-weight:700; font-size:11.5px; width:64px; flex:none; }
+  .step .d { color:var(--dim); font-size:10.5px; }
+
+  .section { margin-top:26px; color:var(--faint); font-size:10px; letter-spacing:.09em; border-top:1px dashed #2d3f55; padding-top:10px; }
+  .rows { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
+  .r { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .r .n { font-size:11.5px; font-weight:600; min-width:210px; }
+  .r .d { color:var(--dim); font-size:10.5px; }
+  .tag { font-size:9px; font-weight:600; letter-spacing:.04em; padding:2px 9px; border-radius:9px; border:1px solid; }
+  .tag-exists { color:var(--green); border-color:rgba(52,211,153,.4); background:rgba(52,211,153,.1); }
+  .tag-missing { color:var(--orange); border-color:rgba(247,127,0,.45); background:rgba(247,127,0,.1); }
+
+  .note { margin-top:16px; background:var(--card-soft); border:1px solid #2d3f55; border-radius:10px;
+          padding:12px 16px; color:var(--dim); font-size:10.5px; line-height:1.7; }
+  .note b { color:var(--text); }
+  .note .hl { color:var(--amber); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>THE CONTEXT LINKER — the next projection</h1>
+  <div class="sub">the memory pipeline made the drive coherent · the linker makes the cache coherent — after ICM → memory pipeline → <b style="color:#fbbf24">this</b></div>
+
+  <div class="grid">
+    <div class="panel in">
+      <div class="ph">INPUTS — SOURCE FILES · COLD · CHANGE RARELY</div>
+      <div class="pt">the program + the data</div>
+      <div class="pl">what the linker reads, not copies</div>
+      <div class="item"><b>AGENTS.md</b> <span class="d">global router — methods</span></div>
+      <div class="item"><b>WORKSPACE profiles</b> <span class="d">methods per domain</span></div>
+      <div class="item"><b>PROFILE</b> <span class="d">the mirror — facts about you</span></div>
+      <div class="item"><b>topology.md</b> <span class="d">project address map</span></div>
+      <div class="item"><b>INDEX · md-index</b> <span class="d">symbol table</span></div>
+      <div class="item"><b>notes · discoveries</b> <span class="d">session deltas</span></div>
+    </div>
+
+    <div class="mid">
+      <div class="cap">once per session boot · deterministic</div>
+      <div class="arr">➜</div>
+    </div>
+
+    <div class="panel pass">
+      <div class="ph">THE LINKER PASS — ASSEMBLE, NEVER TRANSLATE</div>
+      <div class="pt">a linker/loader, not a compiler</div>
+      <div class="pl">the model already understands the language — nothing is translated; only assembled, resolved, ordered, minimized</div>
+      <div class="pass-steps">
+        <div class="step"><span class="k">resolve</span><span class="d">symbols → paths via the index — <b style="color:var(--amber)">never scan</b></span></div>
+        <div class="step"><span class="k">order</span><span class="d">stable prefix first: router → workspace → mirror (max L3 hits)</span></div>
+        <div class="step"><span class="k">dedupe</span><span class="d">drop content the session already knows</span></div>
+        <div class="step"><span class="k">pin</span><span class="d">sha256 <b style="color:var(--amber)">fingerprint</b> of the sources — the loader refreshes only when a fingerprint changes (this is exactly what the librechat refresh check does)</span></div>
+        <div class="step"><span class="k">emit</span><span class="d">one minimal initial-context image</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">OUTPUT — THE SESSION IMAGE</div>
+  <div class="rows">
+    <div class="r"><span class="n">loaded into RAM at boot</span><span class="d">one load, not N — the assembled image is the session's first page</span></div>
+    <div class="r"><span class="n">prefix-stable → cached at L3</span><span class="d">same prefix every session until a source changes → provider-cache hits</span></div>
+    <div class="r"><span class="n">invalidated on</span><span class="d">source change (recompile) · weekly cadence · mirror revision → propagation check</span></div>
+  </div>
+
+  <div class="section">SEEDS ALREADY BUILT — THE MISSING PIECE IS SMALL</div>
+  <div class="rows">
+    <div class="r"><span class="n">librechat system-prompt refresh</span><span class="d">the global loader — regenerates the initial context; its sha256 fingerprint detects drift, so refresh only when it changes</span><span class="tag tag-exists">exists</span></div>
+    <div class="r"><span class="n">mwp concat-context</span><span class="d">the project linker — cascade assembly</span><span class="tag tag-exists">exists</span></div>
+    <div class="r"><span class="n">md-index · INDEX.md</span><span class="d">the symbol table</span><span class="tag tag-exists">exists</span></div>
+    <div class="r"><span class="n">deterministic emit per project + invalidation triggers</span><span class="d">the boot-path output + when-to-recompile</span><span class="tag tag-missing">missing</span></div>
+  </div>
+
+  <div class="section">THE RULE IT ENFORCES — CACHE COHERENCE DISCIPLINE</div>
+  <div class="rows">
+    <div class="r"><span class="n">resolve, never scan</span><span class="d">answer "where does X live?" via the index — one tiny read, not a tree walk</span></div>
+    <div class="r"><span class="n">demand-page</span><span class="d">summaries + ranges, never whole files (wc -l · md-index · offsets)</span></div>
+    <div class="r"><span class="n">batch writes to hot prefixes</span><span class="d">AGENTS.md · workspaces · mirror change rarely, in one coherent write — invalidation is triggered by semantic change, not note volume</span></div>
+  </div>
+
+  <div class="note">
+    <b>Why "linker", not "compiler":</b> a real CPU needs software <i>translated</i> into machine code before it understands it. The LLM already understands the language — the ISA <i>is</i> human language. What's missing is the classic <span class="hl">linking and loading</span> machinery: assembly, symbol resolution, ordering, minimization — and the cache coherence that lets the assembled image stay hot at L3. The context linker is that machinery, and mwp is its project-scope prototype.
+  </div>
+</div>
+</body>
+</html>

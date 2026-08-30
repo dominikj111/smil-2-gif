@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE MEMORY HIERARCHY — v2 (corrected)</title>
+<style>
+  :root {
+    --pcb:#081511; --pcb2:#0a1f18; --chip:#0f2a21; --chipline:#235544; --trace:#3ddc97;
+    --text:#d7e6df; --dim:#8fb3a6; --faint:#4d6b5f;
+    --amber:#fbbf24; --orange:#f77f00; --blue:#60a5fa; --green:#34d399; --violet:#a78bfa; --slate:#94a3b8;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#020617; color:var(--text); font-family:'DejaVu Sans',-apple-system,'Segoe UI',Arial,sans-serif;
+         padding:30px 16px 70px; display:flex; flex-direction:column; align-items:center; }
+  .wrap { width:100%; max-width:940px; }
+  h1 { font-size:20px; font-weight:700; letter-spacing:.02em; }
+  .sub { color:var(--dim); font-size:12px; margin-top:5px; line-height:1.6; }
+
+  .pcb { margin-top:22px; background:var(--pcb); border:2px solid #17382c; border-radius:20px; padding:30px 26px 26px;
+         position:relative;
+         background-image:linear-gradient(rgba(61,220,151,.045) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(61,220,151,.045) 1px, transparent 1px);
+         background-size:24px 24px; }
+  .stack { display:flex; flex-direction:column; align-items:center; gap:0; position:relative; }
+
+  /* chip = IC (with pins on left/right edges) */
+  .chip { position:relative; background:var(--chip); border:1px solid var(--chipline); border-radius:11px;
+          padding:12px 18px; text-align:center; }
+  .chip::before, .chip::after { content:''; position:absolute; top:10px; bottom:10px; width:4px;
+          background:repeating-linear-gradient(to bottom, var(--pin,#3ddc97) 0 4px, transparent 4px 8px); opacity:.85; }
+  .chip::before { left:-7px; } .chip::after { right:-7px; }
+  .chip .n { font-size:12.5px; font-weight:700; letter-spacing:.02em; }
+  .chip .s { font-size:9px; color:var(--dim); margin-top:3px; line-height:1.45; }
+  .wide { width:100%; max-width:840px; }
+  .mid  { width:100%; max-width:640px; }
+  .cpu { border-color:rgba(251,191,36,.55); --pin:var(--amber); } .cpu .n { color:var(--amber); }
+  .drive { border-color:rgba(247,127,0,.6); --pin:var(--orange); } .drive .n { color:var(--orange); }
+
+  /* two-line vertical bus — line A dots ↓, line B dots ↑, dashed */
+  .bus-v { position:relative; width:100%; height:52px; }
+  .bus-v .ln { position:absolute; top:0; bottom:0; width:2px; opacity:.55; }
+  .bus-v .ln.a { left:calc(50% - 8px); } .bus-v .ln.b { left:calc(50% + 6px); }
+  .bus-v .ln.a { background:repeating-linear-gradient(180deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-v .ln.b { background:repeating-linear-gradient(180deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); }
+  .bus-v .dot { position:absolute; width:6px; height:6px; border-radius:50%; background:var(--bc,#3ddc97); opacity:0; margin-left:-3px; }
+  .bus-v .dot.a, .bus-v .dot.a2 { left:calc(50% - 8px); animation:goDown 1.9s linear infinite; }
+  .bus-v .dot.a2 { animation-delay:.95s; }
+  .bus-v .dot.b, .bus-v .dot.b2 { left:calc(50% + 6px); animation:goUp 1.9s linear infinite; }
+  .bus-v .dot.b2 { animation-delay:.95s; }
+  @keyframes goDown { 0%{top:0;opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{top:calc(100% - 6px);opacity:0} }
+  @keyframes goUp   { 0%{top:calc(100% - 6px);opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{top:0;opacity:0} }
+  .bus-v .lbl { position:absolute; left:calc(50% + 14px); top:50%; transform:translateY(-50%);
+                font-size:8.5px; letter-spacing:.06em; color:var(--dim); white-space:nowrap; z-index:1; }
+
+  .buszone { display:flex; width:100%; max-width:640px; gap:12px; }
+  .buszone .bus-v { flex:1; }
+
+  /* single-line vertical bus (one direction) — drive → RAM */
+  .loadwrap { width:100%; max-width:640px; display:flex; }
+  .bus-v1 { position:relative; width:50%; height:44px; }
+  .bus-v1 .ln { position:absolute; top:0; bottom:0; left:50%; width:2px; margin-left:-1px;
+                background:repeating-linear-gradient(180deg, var(--bc,#3ddc97) 0 5px, transparent 5px 10px); opacity:.55; }
+  .bus-v1 .dot { position:absolute; left:50%; width:6px; height:6px; border-radius:50%; margin-left:-3px;
+                 background:var(--bc,#3ddc97); animation:goUp 1.9s linear infinite; opacity:0; }
+  .bus-v1 .dot.d2 { animation-delay:.95s; }
+  .bus-v1 .lbl { position:absolute; left:calc(50% + 10px); top:50%; transform:translateY(-50%);
+                 font-size:8.5px; letter-spacing:.06em; color:var(--dim); white-space:nowrap; }
+
+  /* the memory container — RAM + SWAP */
+  .memcard { width:100%; max-width:640px; background:var(--chip); border:1px solid rgba(96,165,250,.5); border-radius:11px;
+             padding:14px 16px; position:relative; }
+  .memcard .n { color:var(--blue); font-size:12.5px; font-weight:700; }
+  .memcard .s { color:var(--dim); font-size:9px; margin-top:3px; line-height:1.45; }
+  .memcard .cells { display:flex; gap:12px; margin-top:11px; }
+  .memcard .cell { flex:1; background:#0c241c; border:1px solid #1c4637; border-radius:9px; padding:10px 12px; text-align:center; }
+  .cell .n { font-size:11px; font-weight:700; }
+  .cell .s { font-size:8.5px; color:var(--dim); margin-top:2px; line-height:1.4; }
+  .cell.ram .n { color:var(--blue); } .cell.swap .n { color:var(--slate); }
+
+  /* direct write: CPU → DRIVE, bypassing RAM */
+  .dw { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:3; }
+  .dwcap { position:absolute; right:2%; top:37%; color:var(--orange); font-size:9px; letter-spacing:.04em;
+           z-index:3; font-weight:600; text-align:right; }
+
+  /* pipeline */
+  .section { width:100%; max-width:840px; margin-top:24px; color:var(--faint); font-size:10px; letter-spacing:.09em;
+             border-top:1px dashed #235544; padding-top:10px; }
+  .pipeline { display:flex; flex-direction:column; gap:8px; margin-top:12px; width:100%; max-width:840px; }
+  .pline { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .pline .stage { background:var(--chip); border:1px solid var(--chipline); border-radius:9px; padding:8px 13px;
+                  font-size:11.5px; font-weight:600; }
+  .pline .meta { color:var(--dim); font-size:10px; }
+  .pline .arr { color:var(--green); font-size:13px; }
+  .mirror { margin:6px 0 2px; background:var(--chip); border:1px solid rgba(52,211,153,.55); border-radius:10px;
+            padding:10px 14px; font-size:12.5px; font-weight:700; color:var(--green); text-align:center; }
+  .mirror small { display:block; color:var(--dim); font-weight:400; font-size:9.5px; margin-top:2px; }
+
+  .results { display:flex; gap:12px; margin-top:12px; width:100%; max-width:840px; flex-wrap:wrap; }
+  .stat { flex:1; min-width:200px; background:var(--chip); border:1px solid var(--chipline); border-radius:10px;
+          padding:12px 16px; }
+  .stat .v { font-size:18px; font-weight:700; color:var(--amber); }
+  .stat .l { color:var(--dim); font-size:9.5px; margin-top:2px; }
+
+  .note { margin-top:18px; width:100%; max-width:840px; background:rgba(15,23,42,.55); border:1px solid #2d3f55; border-radius:10px;
+          padding:12px 16px; color:var(--dim); font-size:10.5px; line-height:1.7; }
+  .note b { color:var(--text); }
+  .note .hl { color:var(--orange); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>THE MEMORY HIERARCHY — v2 · corrected to the computer-architecture reference</h1>
+  <div class="sub">cpu → ram → swap → drive · one converging mirror · the cache is a copy, never the source ·
+  the processor can also write to the drive directly</div>
+
+  <div class="pcb">
+    <div class="stack">
+
+      <div class="chip cpu wide">
+        <div class="n">THE PROCESSOR — LLM PROVIDER</div>
+        <div class="s">L1 base weights · L2 fine-tuning = firmware, NOT caches — the CPU <i>is</i> these numbers · L3 provider prefix-cache = the real cache (98.8% hits) · fixed · shared</div>
+      </div>
+
+      <!-- CPU ⇄ RAM and CPU ⇄ SWAP: two dashed two-line buses -->
+      <div class="buszone">
+        <div class="bus-v" style="--bc:var(--blue)">
+          <span class="ln a"></span><span class="ln b"></span>
+          <span class="dot a"></span><span class="dot a2"></span><span class="dot b"></span><span class="dot b2"></span>
+          <span class="lbl">memory bus · CPU ⇄ RAM</span>
+        </div>
+        <div class="bus-v" style="--bc:var(--amber)">
+          <span class="ln a"></span><span class="ln b"></span>
+          <span class="dot a"></span><span class="dot a2"></span><span class="dot b"></span><span class="dot b2"></span>
+          <span class="lbl">session store · CPU ⇄ SWAP</span>
+        </div>
+      </div>
+
+      <!-- THE MEMORY — RAM + SWAP -->
+      <div class="memcard">
+        <div class="n">THE MEMORY — EVERYTHING CURRENTLY RUNNING</div>
+        <div class="s">volatile · what the CPU executes against · evaporates after distillation</div>
+        <div class="cells">
+          <div class="cell ram"><div class="n">RAM — chat session</div><div class="s">current context of focus · narrow, scoped prompt per task</div></div>
+          <div class="cell swap"><div class="n">SWAP — session store</div><div class="s">controlled by the LLM provider (pi.dev client) · transcripts · resume markers · cold reloads</div></div>
+        </div>
+      </div>
+
+      <!-- drive → RAM only -->
+      <div class="loadwrap">
+        <div class="bus-v1" style="--bc:var(--orange)">
+          <span class="ln"></span>
+          <span class="dot"></span><span class="dot d2"></span>
+          <span class="lbl">load path — dots to RAM only (not SWAP)</span>
+        </div>
+      </div>
+
+      <div class="chip drive mid">
+        <div class="n">DRIVE — THE ICM FILES · source of truth</div>
+        <div class="s">persistent · private · you control only layer 3 · AGENTS.md router · workspaces · notes · llm_profiles · repos</div>
+      </div>
+
+      <div class="section">THE MEMORY PIPELINE — WRITE-BACK TO THE SOURCE · sessions are dirty cache lines, distilled and written back on schedule</div>
+      <div class="pipeline">
+        <div class="pline"><span class="stage">note-taking</span><span class="meta">auto · in-session</span><span class="arr">→</span><span class="stage">project log</span><span class="meta">project notes · discoveries — stays in the repo · global/durable insights go to llm_profiles (recording-notes)</span></div>
+        <div class="pline" style="margin-top:50px"><span class="stage">profile learning</span><span class="meta">auto · in-session · live</span></div>
+        <div class="pline"><span class="stage">personas aggregation</span><span class="meta">manual · weekly · methods</span></div>
+        <div class="pline"><span class="stage">session distillation</span><span class="meta">manual · weekly · facts</span></div>
+        <div class="arr" style="text-align:center; margin-top:2px; color:var(--green)">▼</div>
+        <div class="mirror">CONVERGING MIRROR<small>an accurate model of how you think · revised in place, never appended</small></div>
+        <div class="arr" style="text-align:center; margin-top:2px; color:var(--orange)">▼ write-back into the files → DRIVE (the mirror becomes the next session's hot prefix)</div>
+      </div>
+
+      <div class="section">THE RESULTS — WHAT THE METHOD BUYS</div>
+      <div class="results">
+        <div class="stat"><div class="v">1.3B</div><div class="l">input tokens in 28 days</div></div>
+        <div class="stat"><div class="v">98.8%</div><div class="l">served from provider cache — the L3 hit rate</div></div>
+        <div class="stat"><div class="v">≈ $20 / month</div><div class="l">≈ 70¢ a day — full-time AI partner</div></div>
+      </div>
+
+      <div class="note">
+        <b>What changed in v2 — the relabeling that makes the metaphor honest:</b><br>
+        · <span class="hl">L1/L2</span> are the processor itself (weights = firmware), not caches — no data flows through them.<br>
+        · <span class="hl">L3</span> is the provider prefix-cache — the real cache, holding <i>hot ICM lines</i>; that's why 98.8% of tokens hit.<br>
+        · the <span class="hl">physical files are the DRIVE</span> — the source; RAM pages from it; the cache keeps the hot lines resident next to the CPU.<br>
+        · the processor can write to the drive <span class="hl">directly</span> (notes, distillation) — the angled path that bypasses RAM.<br>
+        · two axes, one mechanism: <b>latency</b> (fast→slow) vs <b>persistence</b> (what survives). The cache is a <b>copy</b>, never the source.
+      </div>
+
+      <svg class="dw" viewBox="0 0 100 160" preserveAspectRatio="none" aria-hidden="true">
+        <defs><path id="dwpath" d="M 70 10 L 86 68" fill="none"/></defs>
+        <path d="M 70 10 L 86 68" fill="none" stroke="#f77f00" stroke-width="1.3" vector-effect="non-scaling-stroke" stroke-dasharray="4 5" opacity=".6"/>
+        <circle r="1.7" fill="#f77f00"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#dwpath"/></animateMotion></circle>
+        <circle r="1.7" fill="#f77f00"><animateMotion dur="2s" begin="1s" repeatCount="indefinite"><mpath href="#dwpath"/></animateMotion></circle>
+        <polygon points="86,68 81.5,65 82.5,71" fill="#f77f00"/>
+      </svg>
+      <div class="dwcap">↳ direct write to DRIVE —<br>not through RAM (notes · distillation)</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
