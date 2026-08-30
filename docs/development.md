@@ -1,18 +1,20 @@
-# plan.md — Infographic production extension for smil-2-gif
+# development.md — Infographic production extension for smil-2-gif (S-06)
 
 Scope: turn `smil-2-gif` into a reusable sandbox for **client-ready animated
-infographics** (SVG/SMIL front-end) alongside the existing mockup front-end,
-per `gpt-feedback.md`. No code changes yet — this is the plan.
+infographics** (SVG/SMIL front-end) alongside the existing mockup front-end.
+Companion to `proposal.md` — the confirmed implementation plan for story
+S-06 (client showcase / infographic production).
 
 > **Status: CONFIRMED.** All decisions below are settled. Next session:
-> read `plan.md`, then implement per §9 work sequence.
+> read this file, then implement per §9 work sequence.
 
 ## Trigger for the next session
 
 Paste this into the next session to start:
 
-> Implement `plan.md` in this repository (infographic production extension for
-> smil-2-gif). Read `plan.md` first — decisions are confirmed. Work the §9
+> Implement `docs/development.md` in this repository (infographic production
+> extension for smil-2-gif, story S-06). Read it first — decisions are
+> confirmed. Work the §9
 > sequence: (1) `src/diagrams/shared/` authoring layer + gen-all skip tweak,
 > (2) reference artifact `src/diagrams/serving-approaches/` (content/layout/
 > animation/gen), (3) check + playback scripts and package.json wiring,
@@ -38,7 +40,10 @@ Paste this into the next session to start:
 
 ---
 
-## 0. Review of gpt-feedback.md against the actual repository
+## 0. Review of the original feedback against the actual repository
+
+(The source handoff doc `gpt-feedback.md` was archived/deleted 2026-08-30;
+this section is its distilled assessment and remains the record.)
 
 The feedback was clearly written after inspecting the repo — it names the real
 mechanisms (`svg.setCurrentTime`, `useDemoClock`, `encoder.mjs`, playback
