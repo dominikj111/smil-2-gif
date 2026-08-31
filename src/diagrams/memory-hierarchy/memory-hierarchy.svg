@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="960" height="700" viewBox="0 0 960 700">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="960" height="790" viewBox="0 0 960 790">
   <style>
     text { font-family: 'DejaVu Sans', -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
   </style>
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
-    <path id="p-pl2m" d="M 650 418 C 624 420 616 450 590 452" fill="none"/>
-    <path id="p-pa2m" d="M 650 468 L 590 468" fill="none"/>
-    <path id="p-sd2m" d="M 650 516 C 624 518 616 486 590 484" fill="none"/>
-    <path id="p-log-down" d="M 160 488 L 160 560" fill="none"/>
-    <path id="p-mirror-down" d="M 470 488 L 470 560" fill="none"/>
-    <path id="p-back" d="M 160 560 L 758 560" fill="none"/>
+    <path id="p-sd-mirror" d="M 180 536 L 180 560" fill="none"/>
+    <path id="p-ng-melt" d="M 480 440 L 480 496" fill="none"/>
+    <path id="p-np-melt" d="M 780 440 L 780 496" fill="none"/>
+    <path id="p-melt-ws" d="M 480 536 L 480 560" fill="none"/>
+    <path id="p-melt-pk" d="M 780 536 L 780 560" fill="none"/>
+    <path id="p-ws-down" d="M 480 600 L 480 640" fill="none"/>
+    <path id="p-mirror-down" d="M 180 600 L 180 640" fill="none"/>
+    <path id="p-pk-down" d="M 780 600 L 780 640" fill="none"/>
     <filter id="glow-amber" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="960" height="700" fill="#020617"/>
+  <rect width="960" height="790" fill="#020617"/>
   
   <text x="16" y="28" fill="white" font-size="19" font-weight="700" letter-spacing="0.02em">THE MEMORY HIERARCHY</text>
-  <text x="16" y="46" fill="#94a3b8" font-size="11.5">steering an LLM agent locally — files → session → model · one converging mirror</text>
+  <text x="16" y="46" fill="#94a3b8" font-size="11.5">steering an LLM agent locally — files → session → model · three converging surfaces: the mirror · the workspaces · the project</text>
   
   <g>
     <rect x="10" y="60" width="280" height="304" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="18" y="74" fill="#475569" font-size="9.5" letter-spacing="0.09em">L3 · THE ICM LAYER — PRIVATE</text>
+    <text x="18" y="74" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE ICM LAYER — PRIVATE</text>
   </g>
   <g>
     <rect x="16" y="84" width="268" height="272" rx="10" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
     <rect x="16" y="84" width="4" height="272" rx="2" fill="#f77f00" fill-opacity="0.7"/>
-    <text x="28" y="108" fill="white" font-size="13.5" font-weight="700">L3 · ICM — the files</text>
+    <text x="28" y="108" fill="white" font-size="13.5" font-weight="700">ICM — the files</text>
     <text x="28" y="124" fill="#94a3b8" font-size="10.5">authored · local · private</text>
     <rect x="256" y="118" width="13" height="11" rx="2.5" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
     <path d="M 260 118 a 3.5 3.5 0 0 1 7 0" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
@@ -64,7 +66,7 @@
     <text x="38" y="298" fill="white" font-size="12" font-weight="600">ideas</text>
     <text x="38" y="312" fill="#94a3b8" font-size="9.5">future opportunities — a bin for the head</text>
   </g>
-  <text x="28" y="344" fill="#475569" font-size="9">you control only layer 3 — the rest is shared</text>
+  <text x="28" y="344" fill="#475569" font-size="9">the source of truth — the cache is a copy, never the source</text>
   
   <g>
     <rect x="306" y="60" width="300" height="304" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
@@ -83,14 +85,14 @@
   <g>
     <rect x="642" y="108" width="290" height="46" rx="9" fill="#1e293b" stroke="#a78bfa55" stroke-width="1"/>
     <rect x="642" y="108" width="4" height="46" rx="2" fill="#a78bfa" fill-opacity="0.6"/>
-    <text x="656" y="126" fill="white" font-size="12" font-weight="600">L1 · base weights</text>
+    <text x="656" y="126" fill="white" font-size="12" font-weight="600">L1 · internal weights</text>
     <text x="656" y="140" fill="#94a3b8" font-size="9">virtual layer — inside the NN</text>
   </g>
     
   <g>
     <rect x="642" y="242" width="290" height="46" rx="9" fill="#1e293b" stroke="#a78bfa55" stroke-width="1"/>
     <rect x="642" y="242" width="4" height="46" rx="2" fill="#a78bfa" fill-opacity="0.6"/>
-    <text x="656" y="260" fill="white" font-size="12" font-weight="600">L2 · fine-tuning</text>
+    <text x="656" y="260" fill="white" font-size="12" font-weight="600">L2 · fine-tuned weights</text>
     <text x="656" y="274" fill="#94a3b8" font-size="9">modified weights — still inside the NN</text>
   </g>
     
@@ -102,7 +104,7 @@
     <rect x="656" y="150" width="4" height="96" rx="2" fill="#fbbf24" fill-opacity="0.7"/>
     <text x="670" y="174" fill="white" font-size="13.5" font-weight="700">LLM provider</text>
     <text x="670" y="192" fill="#94a3b8" font-size="10">narrow prompt only — files stay local</text>
-    <text x="670" y="208" fill="#fbbf24" font-size="10" font-weight="600">cache-first — stable context hits</text>
+    <text x="670" y="208" fill="#fbbf24" font-size="10" font-weight="600">L3 = provider cache — the working set</text>
     <text x="670" y="228" fill="#475569" font-size="9">L1 · L2 live inside the model</text>
   </g>
     <text x="630" y="322" fill="#475569" font-size="9">fixed · shared — the same weights for everyone</text>
@@ -129,47 +131,67 @@
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sp"/></animateMotion>
   </circle>
   
-  <path d="M 650 418 C 624 420 616 450 590 452" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 180 536 L 180 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite"><mpath href="#p-pl2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-sd-mirror"/></animateMotion>
   </circle>
 
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.5s" begin="0.75s" repeatCount="indefinite"><mpath href="#p-pl2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sd-mirror"/></animateMotion>
   </circle>
   
-  <path d="M 650 468 L 590 468" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 480 440 L 480 496" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-pa2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-ng-melt"/></animateMotion>
   </circle>
 
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-pa2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-ng-melt"/></animateMotion>
   </circle>
   
-  <path d="M 650 516 C 624 518 616 486 590 484" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 780 440 L 780 496" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-sd2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-np-melt"/></animateMotion>
   </circle>
 
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sd2m"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-np-melt"/></animateMotion>
   </circle>
   
-  <path d="M 160 488 L 160 560" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 480 536 L 480 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-melt-ws"/></animateMotion>
+  </circle>
+
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-melt-ws"/></animateMotion>
+  </circle>
+  
+  <path d="M 780 536 L 780 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-melt-pk"/></animateMotion>
+  </circle>
+
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-melt-pk"/></animateMotion>
+  </circle>
+  
+  <path d="M 480 600 L 480 640" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
-    <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-log-down"/></animateMotion>
+    <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-ws-down"/></animateMotion>
   </circle>
 
   <circle r="2" fill="#f77f00" opacity="0.45">
-    <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-log-down"/></animateMotion>
+    <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-ws-down"/></animateMotion>
   </circle>
   
-  <path d="M 470 488 L 470 560" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 180 600 L 180 640" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
     <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-mirror-down"/></animateMotion>
@@ -179,95 +201,138 @@
     <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-mirror-down"/></animateMotion>
   </circle>
   
-  <path d="M 160 560 L 758 560" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+  <path d="M 780 600 L 780 640" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
   
   <circle r="2" fill="#f77f00" opacity="0.45">
-    <animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#p-back"/></animateMotion>
+    <animateMotion dur="1s" begin="0s" repeatCount="indefinite"><mpath href="#p-pk-down"/></animateMotion>
   </circle>
 
   <circle r="2" fill="#f77f00" opacity="0.45">
-    <animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#p-back"/></animateMotion>
+    <animateMotion dur="1s" begin="0.5s" repeatCount="indefinite"><mpath href="#p-pk-down"/></animateMotion>
   </circle>
-  <path d="M 752 555 L 764 560 L 752 565 Z" fill="rgba(247,127,0,0.45)"/>
   
   <g>
-    <rect x="10" y="374" width="940" height="214" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="18" y="388" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE MEMORY PIPELINE — TWO PATHS: THE MIRROR AND THE FILES</text>
+    <rect x="10" y="374" width="940" height="306" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="18" y="388" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → WEEKLY → NARROWED</text>
+    <!-- column 1 — the mirror (self · facts) -->
     
   <g>
-    <rect x="30" y="448" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="30" y="448" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="44" y="464" fill="white" font-size="12.5" font-weight="700">note-taking</text>
-    <text x="44" y="479" fill="#94a3b8" font-size="10">logs the current focus</text>
-    <rect x="196" y="451" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
-    <text x="240" y="464" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
+    <rect x="50" y="400" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="50" y="400" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="64" y="416" fill="white" font-size="12.5" font-weight="700">profile learning</text>
+    <text x="64" y="431" fill="#94a3b8" font-size="10">live — the mirror</text>
+    <rect x="216" y="403" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
+    <text x="260" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto</text>
   </g>
-    <rect x="196" y="471" width="88" height="15" rx="7.5" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
-    <text x="240" y="482" text-anchor="middle" fill="#f77f00" font-size="8.5" font-weight="600">project log</text>
+    
+  <g>
+    <rect x="50" y="448" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="50" y="448" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="64" y="464" fill="white" font-size="12.5" font-weight="700">personas aggregation</text>
+    <text x="64" y="479" fill="#94a3b8" font-size="10">consolidates the personas</text>
+    <rect x="216" y="451" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
+    <text x="260" y="464" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual</text>
+  </g>
+    
+  <g>
+    <rect x="50" y="496" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="50" y="496" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="64" y="512" fill="white" font-size="12.5" font-weight="700">session distillation</text>
+    <text x="64" y="527" fill="#94a3b8" font-size="10">weekly — feeds the mirror</text>
+    <rect x="216" y="499" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
+    <text x="260" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual</text>
+  </g>
+    
+  <g>
+    <rect x="50" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#34d39988" stroke-width="1"/>
+    <rect x="50" y="560" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.8"/>
+    <text x="180" y="577" text-anchor="middle" fill="#34d399" font-size="12" font-weight="700">CONVERGING MIRROR</text>
+    <text x="180" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">an accurate model of how you think</text>
+  </g>
+    <!-- column 2 — the workspaces (practice · global) -->
+    
+  <g>
+    <rect x="350" y="400" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="350" y="400" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="364" y="416" fill="white" font-size="12.5" font-weight="700">note-taking — global</text>
+    <text x="364" y="431" fill="#94a3b8" font-size="10">patterns · durable · cross-project</text>
+    <rect x="516" y="403" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
+    <text x="560" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto</text>
+  </g>
+    
+  <g>
+    <rect x="350" y="496" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="350" y="496" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
+    <text x="364" y="512" fill="white" font-size="12.5" font-weight="700">melt — global</text>
+    <text x="364" y="527" fill="#94a3b8" font-size="10">weekly · clears the notes</text>
+    <rect x="516" y="499" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
+    <text x="560" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">weekly</text>
+  </g>
+    
+  <g>
+    <rect x="350" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
+    <rect x="350" y="560" width="4" height="40" rx="2" fill="#f77f00" fill-opacity="0.8"/>
+    <text x="480" y="577" text-anchor="middle" fill="#f77f00" font-size="12" font-weight="700">CONVERGING WORKSPACES</text>
+    <text x="480" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">narrowed in place · staging cleared</text>
+  </g>
+    <!-- column 3 — the project knowledge (local) -->
     
   <g>
     <rect x="650" y="400" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <rect x="650" y="400" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="416" fill="white" font-size="12.5" font-weight="700">profile learning</text>
-    <text x="664" y="431" fill="#94a3b8" font-size="10">live — the mirror</text>
+    <text x="664" y="416" fill="white" font-size="12.5" font-weight="700">note-taking — project</text>
+    <text x="664" y="431" fill="#94a3b8" font-size="10">repo-scoped · stays in the repo</text>
     <rect x="816" y="403" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
-    <text x="860" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto · in-session</text>
-  </g>
-    
-  <g>
-    <rect x="650" y="448" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="650" y="448" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="464" fill="white" font-size="12.5" font-weight="700">personas aggregation</text>
-    <text x="664" y="479" fill="#94a3b8" font-size="10">consolidates the personas</text>
-    <rect x="816" y="451" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
-    <text x="860" y="464" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual · weekly</text>
+    <text x="860" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto</text>
   </g>
     
   <g>
     <rect x="650" y="496" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <rect x="650" y="496" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="512" fill="white" font-size="12.5" font-weight="700">session distillation</text>
-    <text x="664" y="527" fill="#94a3b8" font-size="10">weekly — feeds the mirror</text>
+    <text x="664" y="512" fill="white" font-size="12.5" font-weight="700">melt — project</text>
+    <text x="664" y="527" fill="#94a3b8" font-size="10">weekly · docs · AGENTS · proposal</text>
     <rect x="816" y="499" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
-    <text x="860" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual · weekly</text>
+    <text x="860" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">weekly</text>
+  </g>
+    
+  <g>
+    <rect x="650" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#fbbf2488" stroke-width="1"/>
+    <rect x="650" y="560" width="4" height="40" rx="2" fill="#fbbf24" fill-opacity="0.8"/>
+    <text x="780" y="577" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">CONVERGING PROJECT KNOWLEDGE</text>
+    <text x="780" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">the project docs converge</text>
   </g>
     <g>
-      <rect x="350" y="448" width="240" height="40" rx="9" fill="#1e293b" stroke="#34d39988" stroke-width="1"/>
-      <rect x="350" y="448" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.8"/>
-      <text x="470" y="465" text-anchor="middle" fill="#34d399" font-size="13" font-weight="700">CONVERGING MIRROR</text>
-      <text x="470" y="480" text-anchor="middle" fill="#94a3b8" font-size="9.5">an accurate model of how you think</text>
+      <rect x="50" y="640" width="860" height="38" rx="10" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
+      <rect x="50" y="640" width="4" height="38" rx="2" fill="#f77f00" fill-opacity="0.8"/>
+      <text x="480" y="658" text-anchor="middle" fill="#f77f00" font-size="12" font-weight="700">ICM — the files</text>
+      <text x="480" y="671" text-anchor="middle" fill="#94a3b8" font-size="9.5">the source of truth — the cache is a copy, never the source</text>
     </g>
-    <g>
-      <rect x="760" y="548" width="180" height="32" rx="9" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
-      <rect x="760" y="548" width="4" height="32" rx="2" fill="#f77f00" fill-opacity="0.8"/>
-      <text x="850" y="567" text-anchor="middle" fill="#f77f00" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
-    </g>
-    <text x="938" y="388" text-anchor="end" fill="#475569" font-size="9.5">note-taking → project log · profile · personas · distillation → mirror · all in the files</text>
+    <text x="938" y="388" text-anchor="end" fill="#475569" font-size="9.5">auto grows · weekly melt + personas · each surface narrows in place</text>
   </g>
   
   <g>
-    <rect x="10" y="598" width="940" height="92" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="18" y="612" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE RESULTS — WHAT THE METHOD BUYS</text>
+    <rect x="10" y="690" width="940" height="92" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="18" y="704" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE RESULTS — WHAT THE METHOD BUYS</text>
     
   <g>
-    <rect x="30" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <text x="50" y="640" fill="#fbbf24" font-size="18" font-weight="700">1.3B</text>
-    <text x="50" y="654" fill="#94a3b8" font-size="9.5">input tokens in 28 days</text>
+    <rect x="50" y="708" width="260" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="70" y="732" fill="#fbbf24" font-size="18" font-weight="700">1.3B</text>
+    <text x="70" y="746" fill="#94a3b8" font-size="9.5">input tokens in 28 days</text>
   </g>
 
   <g>
-    <rect x="342" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <text x="362" y="640" fill="#fbbf24" font-size="18" font-weight="700">98.8%</text>
-    <text x="362" y="654" fill="#94a3b8" font-size="9.5">served from provider cache</text>
+    <rect x="350" y="708" width="260" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="370" y="732" fill="#fbbf24" font-size="18" font-weight="700">98.8%</text>
+    <text x="370" y="746" fill="#94a3b8" font-size="9.5">served from provider cache</text>
   </g>
 
   <g>
-    <rect x="654" y="616" width="290" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <text x="674" y="640" fill="#fbbf24" font-size="18" font-weight="700">≈ $20 / month</text>
-    <text x="674" y="654" fill="#94a3b8" font-size="9.5">≈ 70¢ a day — full-time AI partner</text>
+    <rect x="650" y="708" width="260" height="42" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="670" y="732" fill="#fbbf24" font-size="18" font-weight="700">≈ $20 / month</text>
+    <text x="670" y="746" fill="#94a3b8" font-size="9.5">≈ 70¢ a day — full-time AI partner</text>
   </g>
-    <rect x="30" y="666" width="900" height="18" rx="9" fill="rgba(15,23,42,0.55)" stroke="#475569" stroke-width="1"/>
-    <circle cx="48" cy="675" r="3.5" fill="#fbbf24"/>
-    <text x="62" y="679" fill="#94a3b8" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
+    <rect x="50" y="756" width="860" height="18" rx="9" fill="rgba(15,23,42,0.55)" stroke="#475569" stroke-width="1"/>
+    <circle cx="68" cy="765" r="3.5" fill="#fbbf24"/>
+    <text x="82" y="769" fill="#94a3b8" font-size="9.5">the moat — decisions &amp; reasoning stay in your files · providers see only narrow prompts · they can approximate you, never clone the business</text>
   </g>
 </svg>

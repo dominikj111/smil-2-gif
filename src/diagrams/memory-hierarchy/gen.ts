@@ -2,16 +2,19 @@
  * memory-hierarchy — "the memory hierarchy" of a local LLM workflow.
  *
  * Story: how an LLM agent is steered locally.
- *   L3 ICM — the authored files (AGENTS.md global router + the engineering /
- *   operations / ideas workspaces) — and the chat session it feeds. The
- *   session assembles a narrow scoped prompt and sends it to the LLM provider.
- *   L1 base weights and L2 fine-tuning live inside the model, behind the
- *   provider (fixed, shared). A memory pipeline keeps the knowledge base
- *   alive: note-taking and profile learning trigger automatically in-session
- *   (note-taking only enriches the current project's log), session
- *   distillation runs manually (weekly) — profile learning and session
- *   distillation converge on one mirror: an accurate model of how the
- *   operator thinks. The results: 1.3B tokens/28d, 98.8% cache,
+ *   L1 internal weights · L2 fine-tuned weights live inside the model, L3 =
+ *   the provider cache; the authored files — the ICM layer (AGENTS.md global
+ *   router + the engineering / operations / ideas workspaces) — and the chat
+ *   session it feeds. The session assembles a narrow scoped prompt and sends
+ *   it to the LLM provider. A memory pipeline keeps the knowledge base
+ *   alive: three paths, one shape. Column 1 — the mirror (self · facts):
+ *   profile learning (auto) → personas + distillation (weekly) →
+ *   CONVERGING MIRROR. Column 2 — the workspaces (practice · global):
+ *   note-taking global (auto) → melt (weekly) → CONVERGING WORKSPACES.
+ *   Column 3 — the project knowledge (local): note-taking project (auto) →
+ *   melt (weekly, same skill) → CONVERGING PROJECT KNOWLEDGE (docs · AGENTS ·
+ *   proposals). Every path: auto capture → weekly consolidation → narrowed
+ *   surface. The results: 1.3B tokens/28d, 98.8% cache,
  *   ~$20/month — and a moat (providers approximate, never clone).
  *
  * Static diagram with ambient motion: every section stays fully visible and
@@ -21,7 +24,7 @@
  */
 
 const W = 960
-const H = 700
+const H = 790
 
 // ── palette ─────────────────────────────────────────────────────────────────
 const C = {
@@ -54,24 +57,31 @@ const RIGHT = { x: 622, y: 60, w: 328, h: 304 } // zone: the model
 const L1 = { x: 642, y: 108, w: 290, h: 46 } // behind the provider
 const L2 = { x: 642, y: 242, w: 290, h: 46 } // behind the provider
 const PROVIDER = { x: 656, y: 150, w: 262, h: 96 }
-const PIPELINE = { x: 10, y: 374, w: 940, h: 214 } // note-taking/mirror middle row · right col of three learners
-const NOTE_TAKING = { x: 30, y: 448, w: 260, h: 40 } // left col, aligned with the mirror
-const PROJ_TAG = { x: 196, y: 471, w: 88, h: 15 } // "project log" pill under the auto tag, inside note-taking
-const PROFILE = { x: 650, y: 400, w: 260, h: 40 } // right col row1
-const PERSONAS = { x: 650, y: 448, w: 260, h: 40 } // right col row2 — the middle card
-const DISTILL = { x: 650, y: 496, w: 260, h: 40 } // right col row3
-const MIRROR = { x: 350, y: 448, w: 240, h: 40 } // aligned with the middle card (personas)
-const L3_LABEL = { x: 760, y: 548, w: 180, h: 32 } // the return line's target
-const RESULTS = { x: 10, y: 598, w: 940, h: 92 }
+const PIPELINE = { x: 10, y: 374, w: 940, h: 306 } // three paths, one shape: auto → weekly → narrowed surface
+// column 1 — the mirror (self · facts)
+const PROFILE = { x: 50, y: 400, w: 260, h: 40 }
+const PERSONAS = { x: 50, y: 448, w: 260, h: 40 }
+const DISTILL = { x: 50, y: 496, w: 260, h: 40 }
+const MIRROR = { x: 50, y: 560, w: 260, h: 40 }
+// column 2 — the workspaces (practice · global)
+const NOTE_GLOBAL = { x: 350, y: 400, w: 260, h: 40 }
+const MELT_GLOBAL = { x: 350, y: 496, w: 260, h: 40 }
+const WORKSPACES = { x: 350, y: 560, w: 260, h: 40 }
+// column 3 — the project knowledge (local)
+const NOTE_PROJECT = { x: 650, y: 400, w: 260, h: 40 }
+const MELT_PROJECT = { x: 650, y: 496, w: 260, h: 40 }
+const PROJECT_KNOWLEDGE = { x: 650, y: 560, w: 260, h: 40 }
+const ICM_LABEL = { x: 50, y: 640, w: 860, h: 38 } // write-back target — inset, symmetric margins
+const RESULTS = { x: 10, y: 690, w: 940, h: 92 }
 const CHIPS = [
-  { x: 30, big: '1.3B', sub: 'input tokens in 28 days' },
-  { x: 342, big: '98.8%', sub: 'served from provider cache' },
-  { x: 654, big: '≈ $20 / month', sub: '≈ 70¢ a day — full-time AI partner' },
+  { x: 50, big: '1.3B', sub: 'input tokens in 28 days' },
+  { x: 350, big: '98.8%', sub: 'served from provider cache' },
+  { x: 650, big: '≈ $20 / month', sub: '≈ 70¢ a day — full-time AI partner' },
 ]
-const CHIP_W = 290
+const CHIP_W = 260
 const CHIP_H = 42
-const CHIP_Y = 616
-const NOTE = { x: 30, y: 666, w: 900, h: 18 }
+const CHIP_Y = 708
+const NOTE = { x: 50, y: 756, w: 860, h: 18 }
 
 const tag = (x: number, y: number, s: string) =>
   `<text x="${x}" y="${y}" fill="${C.faint}" font-size="9.5" letter-spacing="0.09em">${s}</text>`
@@ -80,7 +90,7 @@ const tag = (x: number, y: number, s: string) =>
 function header(): string {
   return `
   <text x="16" y="28" fill="white" font-size="19" font-weight="700" letter-spacing="0.02em">THE MEMORY HIERARCHY</text>
-  <text x="16" y="46" fill="${C.dim}" font-size="11.5">steering an LLM agent locally — files → session → model · one converging mirror</text>`
+  <text x="16" y="46" fill="${C.dim}" font-size="11.5">steering an LLM agent locally — files → session → model · three converging surfaces: the mirror · the workspaces · the project</text>`
 }
 
 function icmZone(): string {
@@ -95,12 +105,12 @@ function icmZone(): string {
   return `
   <g>
     <rect x="${LEFT.x}" y="${LEFT.y}" width="${LEFT.w}" height="${LEFT.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
-    ${tag(LEFT.x + 8, LEFT.y + 14, 'L3 · THE ICM LAYER — PRIVATE')}
+    ${tag(LEFT.x + 8, LEFT.y + 14, 'THE ICM LAYER — PRIVATE')}
   </g>
   <g>
     <rect x="${L3.x}" y="${L3.y}" width="${L3.w}" height="${L3.h}" rx="10" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
     <rect x="${L3.x}" y="${L3.y}" width="4" height="${L3.h}" rx="2" fill="${C.icm}" fill-opacity="0.7"/>
-    <text x="${L3.x + 12}" y="${L3.y + 24}" fill="white" font-size="13.5" font-weight="700">L3 · ICM — the files</text>
+    <text x="${L3.x + 12}" y="${L3.y + 24}" fill="white" font-size="13.5" font-weight="700">ICM — the files</text>
     <text x="${L3.x + 12}" y="${L3.y + 40}" fill="${C.dim}" font-size="10.5">authored · local · private</text>
     <rect x="${L3.x + L3.w - 28}" y="${L3.y + 34}" width="13" height="11" rx="2.5" fill="none" stroke="${C.res}" stroke-width="1.6"/>
     <path d="M ${L3.x + L3.w - 24} ${L3.y + 34} a 3.5 3.5 0 0 1 7 0" fill="none" stroke="${C.res}" stroke-width="1.6"/>
@@ -115,7 +125,7 @@ function icmZone(): string {
   </g>
   <text x="26" y="190" fill="${C.faint}" font-size="9" letter-spacing="0.09em">THE WORKSPACES</text>
   ${wsRows}
-  <text x="28" y="344" fill="${C.faint}" font-size="9">you control only layer 3 — the rest is shared</text>`
+  <text x="28" y="344" fill="${C.faint}" font-size="9">the source of truth — the cache is a copy, never the source</text>`
 }
 
 function sessionZone(): string {
@@ -149,7 +159,7 @@ function modelZone(): string {
     <rect x="${PROVIDER.x}" y="${PROVIDER.y}" width="4" height="${PROVIDER.h}" rx="2" fill="${C.res}" fill-opacity="0.7"/>
     <text x="${PROVIDER.x + 14}" y="${PROVIDER.y + 24}" fill="white" font-size="13.5" font-weight="700">LLM provider</text>
     <text x="${PROVIDER.x + 14}" y="${PROVIDER.y + 42}" fill="${C.dim}" font-size="10">narrow prompt only — files stay local</text>
-    <text x="${PROVIDER.x + 14}" y="${PROVIDER.y + 58}" fill="${C.res}" font-size="10" font-weight="600">cache-first — stable context hits</text>
+    <text x="${PROVIDER.x + 14}" y="${PROVIDER.y + 58}" fill="${C.res}" font-size="10" font-weight="600">L3 = provider cache — the working set</text>
     <text x="${PROVIDER.x + 14}" y="${PROVIDER.y + 78}" fill="${C.faint}" font-size="9">L1 · L2 live inside the model</text>
   </g>`
 
@@ -157,8 +167,8 @@ function modelZone(): string {
   <g>
     <rect x="${RIGHT.x}" y="${RIGHT.y}" width="${RIGHT.w}" height="${RIGHT.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
     ${tag(RIGHT.x + 8, RIGHT.y + 14, 'THE MODEL — FIXED · SHARED')}
-    ${layerCard(L1, 'L1 · base weights', 'virtual layer — inside the NN')}
-    ${layerCard(L2, 'L2 · fine-tuning', 'modified weights — still inside the NN')}
+    ${layerCard(L1, 'L1 · internal weights', 'virtual layer — inside the NN')}
+    ${layerCard(L2, 'L2 · fine-tuned weights', 'modified weights — still inside the NN')}
     ${provider}
     <text x="630" y="322" fill="${C.faint}" font-size="9">fixed · shared — the same weights for everyone</text>
   </g>`
@@ -184,19 +194,22 @@ function flows(): string {
   ${flowDots('p-l3s', C.icm, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-sp', 'M 600 185 L 656 185', C.res, 0.55)}
   ${flowDots('p-sp', C.res, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-pl2m', 'M 650 418 C 624 420 616 450 590 452', C.pipe, 0.55)}
-  ${flowDots('p-pl2m', C.pipe, 0.55, 1.5, 2.5, [0, 0.75])}
-  ${flowPath('p-pa2m', 'M 650 468 L 590 468', C.pipe, 0.55)}
-  ${flowDots('p-pa2m', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-sd2m', 'M 650 516 C 624 518 616 486 590 484', C.pipe, 0.55)}
-  ${flowDots('p-sd2m', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-log-down', 'M 160 488 L 160 560', C.icm, 0.45)}
-  ${flowDots('p-log-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
-  ${flowPath('p-mirror-down', 'M 470 488 L 470 560', C.icm, 0.45)}
+  ${flowPath('p-sd-mirror', 'M 180 536 L 180 560', C.pipe, 0.55)}
+  ${flowDots('p-sd-mirror', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-ng-melt', 'M 480 440 L 480 496', C.pipe, 0.55)}
+  ${flowDots('p-ng-melt', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-np-melt', 'M 780 440 L 780 496', C.pipe, 0.55)}
+  ${flowDots('p-np-melt', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-melt-ws', 'M 480 536 L 480 560', C.pipe, 0.55)}
+  ${flowDots('p-melt-ws', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-melt-pk', 'M 780 536 L 780 560', C.pipe, 0.55)}
+  ${flowDots('p-melt-pk', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-ws-down', 'M 480 600 L 480 640', C.icm, 0.45)}
+  ${flowDots('p-ws-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
+  ${flowPath('p-mirror-down', 'M 180 600 L 180 640', C.icm, 0.45)}
   ${flowDots('p-mirror-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
-  ${flowPath('p-back', 'M 160 560 L 758 560', C.icm, 0.45)}
-  ${flowDots('p-back', C.icm, 0.45, 2.4, 2, [0, 1.2])}
-  <path d="M 752 555 L 764 560 L 752 565 Z" fill="rgba(247,127,0,0.45)"/>`
+  ${flowPath('p-pk-down', 'M 780 600 L 780 640', C.icm, 0.45)}
+  ${flowDots('p-pk-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}`
 }
 
 function pipelineZone(): string {
@@ -209,29 +222,38 @@ function pipelineZone(): string {
     <rect x="${x + 166}" y="${y + 3}" width="88" height="18" rx="9" fill="${chipColor}1f" stroke="${chipColor}66" stroke-width="1"/>
     <text x="${x + 210}" y="${y + 16}" text-anchor="middle" fill="${chipColor}" font-size="8.5" font-weight="600">${chip}</text>
   </g>`
+  const surface = (x: number, y: number, title: string, sub: string, accent: string, stroke: string) => `
+  <g>
+    <rect x="${x}" y="${y}" width="260" height="40" rx="9" fill="${C.card}" stroke="${stroke}" stroke-width="1"/>
+    <rect x="${x}" y="${y}" width="4" height="40" rx="2" fill="${accent}" fill-opacity="0.8"/>
+    <text x="${x + 130}" y="${y + 17}" text-anchor="middle" fill="${accent}" font-size="12" font-weight="700">${title}</text>
+    <text x="${x + 130}" y="${y + 32}" text-anchor="middle" fill="${C.dim}" font-size="9.5">${sub}</text>
+  </g>`
 
   return `
   <g>
     <rect x="${PIPELINE.x}" y="${PIPELINE.y}" width="${PIPELINE.w}" height="${PIPELINE.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
-    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — TWO PATHS: THE MIRROR AND THE FILES')}
-    ${skillCard(NOTE_TAKING.x, NOTE_TAKING.y, 'note-taking', 'logs the current focus', 'auto · in-session', C.pipe)}
-    <rect x="${PROJ_TAG.x}" y="${PROJ_TAG.y}" width="${PROJ_TAG.w}" height="${PROJ_TAG.h}" rx="7.5" fill="rgba(247,127,0,0.1)" stroke="rgba(247,127,0,0.45)" stroke-width="1"/>
-    <text x="240" y="482" text-anchor="middle" fill="${C.icm}" font-size="8.5" font-weight="600">project log</text>
-    ${skillCard(PROFILE.x, PROFILE.y, 'profile learning', 'live — the mirror', 'auto · in-session', C.pipe)}
-    ${skillCard(PERSONAS.x, PERSONAS.y, 'personas aggregation', 'consolidates the personas', 'manual · weekly', C.res)}
-    ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'weekly — feeds the mirror', 'manual · weekly', C.res)}
+    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → WEEKLY → NARROWED')}
+    <!-- column 1 — the mirror (self · facts) -->
+    ${skillCard(PROFILE.x, PROFILE.y, 'profile learning', 'live — the mirror', 'auto', C.pipe)}
+    ${skillCard(PERSONAS.x, PERSONAS.y, 'personas aggregation', 'consolidates the personas', 'manual', C.res)}
+    ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'weekly — feeds the mirror', 'manual', C.res)}
+    ${surface(MIRROR.x, MIRROR.y, 'CONVERGING MIRROR', 'an accurate model of how you think', C.pipe, `${C.pipe}88`)}
+    <!-- column 2 — the workspaces (practice · global) -->
+    ${skillCard(NOTE_GLOBAL.x, NOTE_GLOBAL.y, 'note-taking — global', 'patterns · durable · cross-project', 'auto', C.pipe)}
+    ${skillCard(MELT_GLOBAL.x, MELT_GLOBAL.y, 'melt — global', 'weekly · clears the notes', 'weekly', C.res)}
+    ${surface(WORKSPACES.x, WORKSPACES.y, 'CONVERGING WORKSPACES', 'narrowed in place · staging cleared', C.icm, `${C.icm}88`)}
+    <!-- column 3 — the project knowledge (local) -->
+    ${skillCard(NOTE_PROJECT.x, NOTE_PROJECT.y, 'note-taking — project', 'repo-scoped · stays in the repo', 'auto', C.pipe)}
+    ${skillCard(MELT_PROJECT.x, MELT_PROJECT.y, 'melt — project', 'weekly · docs · AGENTS · proposal', 'weekly', C.res)}
+    ${surface(PROJECT_KNOWLEDGE.x, PROJECT_KNOWLEDGE.y, 'CONVERGING PROJECT KNOWLEDGE', 'the project docs converge', C.res, `${C.res}88`)}
     <g>
-      <rect x="${MIRROR.x}" y="${MIRROR.y}" width="${MIRROR.w}" height="${MIRROR.h}" rx="9" fill="${C.card}" stroke="${C.pipe}88" stroke-width="1"/>
-      <rect x="${MIRROR.x}" y="${MIRROR.y}" width="4" height="${MIRROR.h}" rx="2" fill="${C.pipe}" fill-opacity="0.8"/>
-      <text x="${MIRROR.x + MIRROR.w / 2}" y="${MIRROR.y + 17}" text-anchor="middle" fill="${C.pipe}" font-size="13" font-weight="700">CONVERGING MIRROR</text>
-      <text x="${MIRROR.x + MIRROR.w / 2}" y="${MIRROR.y + 32}" text-anchor="middle" fill="${C.dim}" font-size="9.5">an accurate model of how you think</text>
+      <rect x="${ICM_LABEL.x}" y="${ICM_LABEL.y}" width="${ICM_LABEL.w}" height="${ICM_LABEL.h}" rx="10" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
+      <rect x="${ICM_LABEL.x}" y="${ICM_LABEL.y}" width="4" height="${ICM_LABEL.h}" rx="2" fill="${C.icm}" fill-opacity="0.8"/>
+      <text x="${ICM_LABEL.x + ICM_LABEL.w / 2}" y="${ICM_LABEL.y + 18}" text-anchor="middle" fill="${C.icm}" font-size="12" font-weight="700">ICM — the files</text>
+      <text x="${ICM_LABEL.x + ICM_LABEL.w / 2}" y="${ICM_LABEL.y + 31}" text-anchor="middle" fill="${C.dim}" font-size="9.5">the source of truth — the cache is a copy, never the source</text>
     </g>
-    <g>
-      <rect x="${L3_LABEL.x}" y="${L3_LABEL.y}" width="${L3_LABEL.w}" height="${L3_LABEL.h}" rx="9" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
-      <rect x="${L3_LABEL.x}" y="${L3_LABEL.y}" width="4" height="${L3_LABEL.h}" rx="2" fill="${C.icm}" fill-opacity="0.8"/>
-      <text x="${L3_LABEL.x + L3_LABEL.w / 2}" y="${L3_LABEL.y + 19}" text-anchor="middle" fill="${C.icm}" font-size="10.5" font-weight="700">L3 · ICM — the files</text>
-    </g>
-    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">note-taking → project log · profile · personas · distillation → mirror · all in the files</text>
+    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">auto grows · weekly melt + personas · each surface narrows in place</text>
   </g>`
 }
 
@@ -264,12 +286,14 @@ export function generate(): string {
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
-    <path id="p-pl2m" d="M 650 418 C 624 420 616 450 590 452" fill="none"/>
-    <path id="p-pa2m" d="M 650 468 L 590 468" fill="none"/>
-    <path id="p-sd2m" d="M 650 516 C 624 518 616 486 590 484" fill="none"/>
-    <path id="p-log-down" d="M 160 488 L 160 560" fill="none"/>
-    <path id="p-mirror-down" d="M 470 488 L 470 560" fill="none"/>
-    <path id="p-back" d="M 160 560 L 758 560" fill="none"/>
+    <path id="p-sd-mirror" d="M 180 536 L 180 560" fill="none"/>
+    <path id="p-ng-melt" d="M 480 440 L 480 496" fill="none"/>
+    <path id="p-np-melt" d="M 780 440 L 780 496" fill="none"/>
+    <path id="p-melt-ws" d="M 480 536 L 480 560" fill="none"/>
+    <path id="p-melt-pk" d="M 780 536 L 780 560" fill="none"/>
+    <path id="p-ws-down" d="M 480 600 L 480 640" fill="none"/>
+    <path id="p-mirror-down" d="M 180 600 L 180 640" fill="none"/>
+    <path id="p-pk-down" d="M 780 600 L 780 640" fill="none"/>
     <filter id="glow-amber" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
