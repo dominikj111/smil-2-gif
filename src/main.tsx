@@ -101,11 +101,9 @@ function App() {
           deterministically by the exporter via <code>window.__demoClock</code>).
           <br />
           <strong>HTML artifacts</strong> (standalone review pages, no pipeline):{' '}
-          <a href="/html/memory-hierarchy-v2.html">memory-hierarchy-v2.html</a>
+          <a href="/html/motherboard.html">motherboard.html</a>
           {' · '}
           <a href="/html/context-linker-sketch.html">context-linker-sketch.html</a>
-          {' · '}
-          <a href="/html/motherboard.html">motherboard.html</a>
         </p>
       </header>
       <TransportStrip />

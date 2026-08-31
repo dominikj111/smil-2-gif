@@ -58,9 +58,18 @@ the client showcase** — demonstrate mock pages built from real components
 
 - **Status:** ✅ 2026-08-30
 - **Goal:** A "just html" authoring mode — standalone review pages that never go through the gif pipeline.
-- **Deliverables:** `html/` (`memory-hierarchy-v2.html`, `context-linker-sketch.html`, `motherboard.html`); links from the review page.
+- **Deliverables:** `html/` — `motherboard.html` (canonical: the board + NB⇄RAM routing + write-back pipeline + results; absorbed memory-hierarchy-v2) and `context-linker-sketch.html`; links from the review page.
 - **Acceptance:** each page opens standalone (inline CSS, no build); the gif pipeline never touches `html/`.
 - **Design refs:** proposal §2 (HTML review artifacts)
+- **Hand-off:** [handoffs/01-html-review-artifacts.md](handoffs/01-html-review-artifacts.md)
+
+### S-05a — Merge the memory-hierarchy diagrams ✅
+
+- **Status:** ✅ 2026-08-30
+- **Goal:** One canonical board, not two near-duplicate diagrams.
+- **Deliverables:** v2 merged into `motherboard.html` (NB ⇄ RAM routing line completes the router); board later trimmed to **chipset-only** (pipeline + results moved out); `memory-hierarchy-v2.html` retired; the memory-hierarchy diagram's pipeline redesigned to **two surfaces** — note-taking → global | project, notes melted into guidelines → CONVERGING WORKSPACES, learners → CONVERGING MIRROR.
+- **Acceptance:** motherboard reads as the single chipset diagram; every bus touches chip edges (verified 0px gaps); the main-page pipeline check passes; no stale links.
+- **Design refs:** proposal §2
 - **Hand-off:** [handoffs/01-html-review-artifacts.md](handoffs/01-html-review-artifacts.md)
 
 ### S-06 — Client showcase automation ⬜
