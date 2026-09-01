@@ -70,10 +70,10 @@ export function ffmpeg(args) {
 }
 
 /** page.screenshot is occasionally flaky in headless shell; retry a few times */
-export async function screenshotWithRetry(page, path) {
+export async function screenshotWithRetry(page, path, extra = {}) {
   for (let attempt = 1; attempt <= 4; attempt++) {
     try {
-      await page.screenshot({ path })
+      await page.screenshot({ path, ...extra })
       return
     } catch (err) {
       if (attempt === 4) throw err
@@ -90,24 +90,26 @@ export async function screenshotWithRetry(page, path) {
  * @param {import('playwright').Page} p.page
  * @param {string} p.framesDir   temp dir for frame_%04d.png
  * @param {object} p.opts        validated options (has .totalFrames, .fps, .preview, .previewAt)
+ * @param {object} [p.clip]      clip rect ({x,y,width,height}) — capture only a page region (element-scoped capture)
  * @param {(t: number, i: number) => Promise<void>} p.perFrame  advance the authoring
  *        timeline to time t (SMIL seek or demo-clock step), then settle the frame
  * @param {(t: number) => Promise<void>} [p.settle]  extra wait to let rendering flush
  */
-export async function captureLoop({ page, framesDir, opts, perFrame, settle }) {
+export async function captureLoop({ page, framesDir, opts, perFrame, settle, clip }) {
   const previewAt = opts.previewAt ?? opts.duration * 0.6
   const start = Date.now()
   const wait = settle ?? (async () => { await page.waitForTimeout(30) })
+  const shot = (path) => screenshotWithRetry(page, path, clip ? { clip } : {})
 
   for (let i = 0; i < opts.totalFrames; i++) {
     const t = i / opts.fps
     await perFrame(t, i)
     await wait(t, i)
     const framePath = join(framesDir, `frame_${String(i).padStart(4, '0')}.png`)
-    await screenshotWithRetry(page, framePath)
+    await shot(framePath)
 
     if (opts.preview && Math.abs(t - previewAt) < 0.5 / opts.fps) {
-      await screenshotWithRetry(page, opts.preview)
+      await shot(opts.preview)
       console.error(`Preview: ${opts.preview} (t=${t.toFixed(2)}s)`)
     }
 
