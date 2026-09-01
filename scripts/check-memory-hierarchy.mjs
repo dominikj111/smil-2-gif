@@ -55,7 +55,6 @@ const labels = [
   'melt — global',
   'CONVERGING WORKSPACES',
   'note-taking — project',
-  'melt — project',
   'CONVERGING PROJECT KNOWLEDGE',
   '1.3B',
   '98.8%',
@@ -80,11 +79,12 @@ const seek = async (t) => {
     const zones = Object.fromEntries(labels.map((l) => [l, op(gOf(l))]))
     zones['flow-l3s'] = pathOp('M 284 185 L 312 185')
     zones['flow-sp'] = pathOp('M 600 185 L 656 185')
+    zones['flow-profpers'] = pathOp('M 180 440 L 180 448')
+    zones['flow-persdist'] = pathOp('M 180 488 L 180 496')
     zones['flow-sdm'] = pathOp('M 180 536 L 180 560')
     zones['flow-ngm'] = pathOp('M 480 440 L 480 496')
-    zones['flow-npm'] = pathOp('M 780 440 L 780 496')
+    zones['flow-nppk'] = pathOp('M 780 440 L 780 560')
     zones['flow-meltws'] = pathOp('M 480 536 L 480 560')
-    zones['flow-meltpk'] = pathOp('M 780 536 L 780 560')
     zones['flow-wsdown'] = pathOp('M 480 600 L 480 640')
     zones['flow-mirrordown'] = pathOp('M 180 600 L 180 640')
     zones['flow-pkdown'] = pathOp('M 780 600 L 780 640')
@@ -96,7 +96,7 @@ const times = [0.2, 3, 6, 9, 12, 13.5]
 for (const t of times) {
   const p = await seek(t)
   const failed = labels.filter((l) => !(Math.abs(p[l] - 1) <= 0.05)).map((l) => `${l}=${p[l].toFixed(2)}`)
-  const flowExpect = { 'flow-l3s': 0.55, 'flow-sp': 0.55, 'flow-sdm': 0.55, 'flow-ngm': 0.55, 'flow-npm': 0.55, 'flow-meltws': 0.55, 'flow-meltpk': 0.55, 'flow-wsdown': 0.45, 'flow-mirrordown': 0.45, 'flow-pkdown': 0.45 }
+  const flowExpect = { 'flow-l3s': 0.55, 'flow-sp': 0.55, 'flow-profpers': 0.55, 'flow-persdist': 0.55, 'flow-sdm': 0.55, 'flow-ngm': 0.55, 'flow-nppk': 0.55, 'flow-meltws': 0.55, 'flow-wsdown': 0.45, 'flow-mirrordown': 0.45, 'flow-pkdown': 0.45 }
   for (const [k, v] of Object.entries(flowExpect)) {
     if (!(Math.abs(p[k] - v) <= 0.05)) failed.push(`${k}=${p[k].toFixed(2)}(exp ${v})`)
   }

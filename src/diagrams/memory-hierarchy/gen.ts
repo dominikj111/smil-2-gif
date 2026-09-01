@@ -12,9 +12,10 @@
  *   CONVERGING MIRROR. Column 2 — the workspaces (practice · global):
  *   note-taking global (auto) → melt (manual) → CONVERGING WORKSPACES.
  *   Column 3 — the project knowledge (local): note-taking project (auto) →
- *   melt (manual, same skill) → CONVERGING PROJECT KNOWLEDGE (docs · AGENTS ·
- *   proposals). Every path: auto capture → manual consolidation → narrowed
- *   surface. The results: 1.3B tokens/28d, 98.8% cache,
+ *   CONVERGING PROJECT KNOWLEDGE — no melt: the AI edits the docs directly
+ *   during sessions, so the project docs converge in place. Every path:
+ *   auto capture → narrowed surface; a weekly manual consolidation (melt)
+ *   only where it earns its cost (the mirror · the workspaces). The
  *   ~$20/month — and a moat (providers approximate, never clone).
  *
  * Static diagram with ambient motion: every section stays fully visible and
@@ -69,7 +70,6 @@ const MELT_GLOBAL = { x: 350, y: 496, w: 260, h: 40 }
 const WORKSPACES = { x: 350, y: 560, w: 260, h: 40 }
 // column 3 — the project knowledge (local)
 const NOTE_PROJECT = { x: 650, y: 400, w: 260, h: 40 }
-const MELT_PROJECT = { x: 650, y: 496, w: 260, h: 40 }
 const PROJECT_KNOWLEDGE = { x: 650, y: 560, w: 260, h: 40 }
 const ICM_LABEL = { x: 50, y: 640, w: 860, h: 38 } // write-back target — inset, symmetric margins
 const RESULTS = { x: 10, y: 690, w: 940, h: 92 }
@@ -194,16 +194,18 @@ function flows(): string {
   ${flowDots('p-l3s', C.icm, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-sp', 'M 600 185 L 656 185', C.res, 0.55)}
   ${flowDots('p-sp', C.res, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-prof-pers', 'M 180 440 L 180 448', C.pipe, 0.55)}
+  ${flowDots('p-prof-pers', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-pers-dist', 'M 180 488 L 180 496', C.pipe, 0.55)}
+  ${flowDots('p-pers-dist', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-sd-mirror', 'M 180 536 L 180 560', C.pipe, 0.55)}
   ${flowDots('p-sd-mirror', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-ng-melt', 'M 480 440 L 480 496', C.pipe, 0.55)}
   ${flowDots('p-ng-melt', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-np-melt', 'M 780 440 L 780 496', C.pipe, 0.55)}
-  ${flowDots('p-np-melt', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
+  ${flowPath('p-np-pk', 'M 780 440 L 780 560', C.pipe, 0.55)}
+  ${flowDots('p-np-pk', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-melt-ws', 'M 480 536 L 480 560', C.pipe, 0.55)}
   ${flowDots('p-melt-ws', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
-  ${flowPath('p-melt-pk', 'M 780 536 L 780 560', C.pipe, 0.55)}
-  ${flowDots('p-melt-pk', C.pipe, 0.55, 1.2, 2.5, [0, 0.6])}
   ${flowPath('p-ws-down', 'M 480 600 L 480 640', C.icm, 0.45)}
   ${flowDots('p-ws-down', C.icm, 0.45, 1.0, 2, [0, 0.5])}
   ${flowPath('p-mirror-down', 'M 180 600 L 180 640', C.icm, 0.45)}
@@ -233,20 +235,19 @@ function pipelineZone(): string {
   return `
   <g>
     <rect x="${PIPELINE.x}" y="${PIPELINE.y}" width="${PIPELINE.w}" height="${PIPELINE.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
-    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → MANUAL → NARROWED')}
+    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — AUTO → MANUAL → NARROWED · PROJECTS CONVERGE DIRECTLY')}
     <!-- column 1 — the mirror (self · facts) -->
     ${skillCard(PROFILE.x, PROFILE.y, 'profile learning', 'live — the mirror', 'auto', C.pipe)}
     ${skillCard(PERSONAS.x, PERSONAS.y, 'personas aggregation', 'consolidates the personas', 'manual', C.res)}
     ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'manual — feeds the mirror', 'manual', C.res)}
-    ${surface(MIRROR.x, MIRROR.y, 'CONVERGING MIRROR', 'an accurate model of how you think', C.pipe, `${C.pipe}88`)}
+    ${surface(MIRROR.x, MIRROR.y, 'CONVERGING MIRROR', 'accurate model of how you think → notes/PROFILE.md', C.pipe, `${C.pipe}88`)}
     <!-- column 2 — the workspaces (practice · global) -->
-    ${skillCard(NOTE_GLOBAL.x, NOTE_GLOBAL.y, 'note-taking — global', 'patterns · durable · cross-project', 'auto', C.pipe)}
-    ${skillCard(MELT_GLOBAL.x, MELT_GLOBAL.y, 'melt — global', 'manual · clears the notes', 'manual', C.res)}
-    ${surface(WORKSPACES.x, WORKSPACES.y, 'CONVERGING WORKSPACES', 'narrowed in place · staging cleared', C.icm, `${C.icm}88`)}
+    ${skillCard(NOTE_GLOBAL.x, NOTE_GLOBAL.y, 'note-taking — global', 'durable · cross-project → the global notes dir', 'auto', C.pipe)}
+    ${skillCard(MELT_GLOBAL.x, MELT_GLOBAL.y, 'melt — global', 'manual · consume · narrow · clear', 'manual', C.res)}
+    ${surface(WORKSPACES.x, WORKSPACES.y, 'CONVERGING WORKSPACES', 'narrowed in place → engineering/WORKSPACE.md', C.icm, `${C.icm}88`)}
     <!-- column 3 — the project knowledge (local) -->
-    ${skillCard(NOTE_PROJECT.x, NOTE_PROJECT.y, 'note-taking — project', 'repo-scoped · stays in the repo', 'auto', C.pipe)}
-    ${skillCard(MELT_PROJECT.x, MELT_PROJECT.y, 'melt — project', 'manual · docs · AGENTS · proposal', 'manual', C.res)}
-    ${surface(PROJECT_KNOWLEDGE.x, PROJECT_KNOWLEDGE.y, 'CONVERGING PROJECT KNOWLEDGE', 'the project docs converge', C.res, `${C.res}88`)}
+    ${skillCard(NOTE_PROJECT.x, NOTE_PROJECT.y, 'note-taking — project', 'stays in the repo → the docs · README, …', 'auto', C.pipe)}
+    ${surface(PROJECT_KNOWLEDGE.x, PROJECT_KNOWLEDGE.y, 'CONVERGING PROJECT KNOWLEDGE', 'the docs converge · no melt — edited directly', C.res, `${C.res}88`)}
     <g>
       <rect x="${ICM_LABEL.x}" y="${ICM_LABEL.y}" width="${ICM_LABEL.w}" height="${ICM_LABEL.h}" rx="10" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
       <rect x="${ICM_LABEL.x}" y="${ICM_LABEL.y}" width="4" height="${ICM_LABEL.h}" rx="2" fill="${C.icm}" fill-opacity="0.8"/>
@@ -286,11 +287,12 @@ export function generate(): string {
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
+    <path id="p-prof-pers" d="M 180 440 L 180 448" fill="none"/>
+    <path id="p-pers-dist" d="M 180 488 L 180 496" fill="none"/>
     <path id="p-sd-mirror" d="M 180 536 L 180 560" fill="none"/>
     <path id="p-ng-melt" d="M 480 440 L 480 496" fill="none"/>
-    <path id="p-np-melt" d="M 780 440 L 780 496" fill="none"/>
+    <path id="p-np-pk" d="M 780 440 L 780 560" fill="none"/>
     <path id="p-melt-ws" d="M 480 536 L 480 560" fill="none"/>
-    <path id="p-melt-pk" d="M 780 536 L 780 560" fill="none"/>
     <path id="p-ws-down" d="M 480 600 L 480 640" fill="none"/>
     <path id="p-mirror-down" d="M 180 600 L 180 640" fill="none"/>
     <path id="p-pk-down" d="M 780 600 L 780 640" fill="none"/>

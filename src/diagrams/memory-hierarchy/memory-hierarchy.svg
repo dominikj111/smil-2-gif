@@ -6,11 +6,12 @@
   <defs>
     <path id="p-l3s" d="M 284 185 L 312 185" fill="none"/>
     <path id="p-sp" d="M 600 185 L 656 185" fill="none"/>
+    <path id="p-prof-pers" d="M 180 440 L 180 448" fill="none"/>
+    <path id="p-pers-dist" d="M 180 488 L 180 496" fill="none"/>
     <path id="p-sd-mirror" d="M 180 536 L 180 560" fill="none"/>
     <path id="p-ng-melt" d="M 480 440 L 480 496" fill="none"/>
-    <path id="p-np-melt" d="M 780 440 L 780 496" fill="none"/>
+    <path id="p-np-pk" d="M 780 440 L 780 560" fill="none"/>
     <path id="p-melt-ws" d="M 480 536 L 480 560" fill="none"/>
-    <path id="p-melt-pk" d="M 780 536 L 780 560" fill="none"/>
     <path id="p-ws-down" d="M 480 600 L 480 640" fill="none"/>
     <path id="p-mirror-down" d="M 180 600 L 180 640" fill="none"/>
     <path id="p-pk-down" d="M 780 600 L 780 640" fill="none"/>
@@ -131,6 +132,26 @@
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-sp"/></animateMotion>
   </circle>
   
+  <path d="M 180 440 L 180 448" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-prof-pers"/></animateMotion>
+  </circle>
+
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-prof-pers"/></animateMotion>
+  </circle>
+  
+  <path d="M 180 488 L 180 496" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-pers-dist"/></animateMotion>
+  </circle>
+
+  <circle r="2.5" fill="#34d399" opacity="0.55">
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-pers-dist"/></animateMotion>
+  </circle>
+  
   <path d="M 180 536 L 180 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
@@ -151,14 +172,14 @@
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-ng-melt"/></animateMotion>
   </circle>
   
-  <path d="M 780 440 L 780 496" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+  <path d="M 780 440 L 780 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
   
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-np-melt"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-np-pk"/></animateMotion>
   </circle>
 
   <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-np-melt"/></animateMotion>
+    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-np-pk"/></animateMotion>
   </circle>
   
   <path d="M 480 536 L 480 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
@@ -169,16 +190,6 @@
 
   <circle r="2.5" fill="#34d399" opacity="0.55">
     <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-melt-ws"/></animateMotion>
-  </circle>
-  
-  <path d="M 780 536 L 780 560" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
-  
-  <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0s" repeatCount="indefinite"><mpath href="#p-melt-pk"/></animateMotion>
-  </circle>
-
-  <circle r="2.5" fill="#34d399" opacity="0.55">
-    <animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-melt-pk"/></animateMotion>
   </circle>
   
   <path d="M 480 600 L 480 640" fill="none" stroke="#f77f00" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
@@ -213,7 +224,7 @@
   
   <g>
     <rect x="10" y="374" width="940" height="306" rx="12" fill="rgba(15,23,42,0.5)" stroke="#2d3f55" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="18" y="388" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → MANUAL → NARROWED</text>
+    <text x="18" y="388" fill="#475569" font-size="9.5" letter-spacing="0.09em">THE MEMORY PIPELINE — AUTO → MANUAL → NARROWED · PROJECTS CONVERGE DIRECTLY</text>
     <!-- column 1 — the mirror (self · facts) -->
     
   <g>
@@ -247,7 +258,7 @@
     <rect x="50" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#34d39988" stroke-width="1"/>
     <rect x="50" y="560" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.8"/>
     <text x="180" y="577" text-anchor="middle" fill="#34d399" font-size="12" font-weight="700">CONVERGING MIRROR</text>
-    <text x="180" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">an accurate model of how you think</text>
+    <text x="180" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">accurate model of how you think → notes/PROFILE.md</text>
   </g>
     <!-- column 2 — the workspaces (practice · global) -->
     
@@ -255,7 +266,7 @@
     <rect x="350" y="400" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <rect x="350" y="400" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
     <text x="364" y="416" fill="white" font-size="12.5" font-weight="700">note-taking — global</text>
-    <text x="364" y="431" fill="#94a3b8" font-size="10">patterns · durable · cross-project</text>
+    <text x="364" y="431" fill="#94a3b8" font-size="10">durable · cross-project → the global notes dir</text>
     <rect x="516" y="403" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
     <text x="560" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto</text>
   </g>
@@ -264,7 +275,7 @@
     <rect x="350" y="496" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <rect x="350" y="496" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
     <text x="364" y="512" fill="white" font-size="12.5" font-weight="700">melt — global</text>
-    <text x="364" y="527" fill="#94a3b8" font-size="10">manual · clears the notes</text>
+    <text x="364" y="527" fill="#94a3b8" font-size="10">manual · consume · narrow · clear</text>
     <rect x="516" y="499" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
     <text x="560" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual</text>
   </g>
@@ -273,7 +284,7 @@
     <rect x="350" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
     <rect x="350" y="560" width="4" height="40" rx="2" fill="#f77f00" fill-opacity="0.8"/>
     <text x="480" y="577" text-anchor="middle" fill="#f77f00" font-size="12" font-weight="700">CONVERGING WORKSPACES</text>
-    <text x="480" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">narrowed in place · staging cleared</text>
+    <text x="480" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">narrowed in place → engineering/WORKSPACE.md</text>
   </g>
     <!-- column 3 — the project knowledge (local) -->
     
@@ -281,25 +292,16 @@
     <rect x="650" y="400" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
     <rect x="650" y="400" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
     <text x="664" y="416" fill="white" font-size="12.5" font-weight="700">note-taking — project</text>
-    <text x="664" y="431" fill="#94a3b8" font-size="10">repo-scoped · stays in the repo</text>
+    <text x="664" y="431" fill="#94a3b8" font-size="10">stays in the repo → the docs · README, …</text>
     <rect x="816" y="403" width="88" height="18" rx="9" fill="#34d3991f" stroke="#34d39966" stroke-width="1"/>
     <text x="860" y="416" text-anchor="middle" fill="#34d399" font-size="8.5" font-weight="600">auto</text>
-  </g>
-    
-  <g>
-    <rect x="650" y="496" width="260" height="40" rx="9" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-    <rect x="650" y="496" width="4" height="40" rx="2" fill="#34d399" fill-opacity="0.65"/>
-    <text x="664" y="512" fill="white" font-size="12.5" font-weight="700">melt — project</text>
-    <text x="664" y="527" fill="#94a3b8" font-size="10">manual · docs · AGENTS · proposal</text>
-    <rect x="816" y="499" width="88" height="18" rx="9" fill="#fbbf241f" stroke="#fbbf2466" stroke-width="1"/>
-    <text x="860" y="512" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-weight="600">manual</text>
   </g>
     
   <g>
     <rect x="650" y="560" width="260" height="40" rx="9" fill="#1e293b" stroke="#fbbf2488" stroke-width="1"/>
     <rect x="650" y="560" width="4" height="40" rx="2" fill="#fbbf24" fill-opacity="0.8"/>
     <text x="780" y="577" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">CONVERGING PROJECT KNOWLEDGE</text>
-    <text x="780" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">the project docs converge</text>
+    <text x="780" y="592" text-anchor="middle" fill="#94a3b8" font-size="9.5">the docs converge · no melt — edited directly</text>
   </g>
     <g>
       <rect x="50" y="640" width="860" height="38" rx="10" fill="#1e293b" stroke="#f77f0088" stroke-width="1"/>
