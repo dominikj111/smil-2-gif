@@ -8,12 +8,12 @@
  *   session it feeds. The session assembles a narrow scoped prompt and sends
  *   it to the LLM provider. A memory pipeline keeps the knowledge base
  *   alive: three paths, one shape. Column 1 — the mirror (self · facts):
- *   profile learning (auto) → personas + distillation (weekly) →
+ *   profile learning (auto) → personas + distillation (manual) →
  *   CONVERGING MIRROR. Column 2 — the workspaces (practice · global):
- *   note-taking global (auto) → melt (weekly) → CONVERGING WORKSPACES.
+ *   note-taking global (auto) → melt (manual) → CONVERGING WORKSPACES.
  *   Column 3 — the project knowledge (local): note-taking project (auto) →
- *   melt (weekly, same skill) → CONVERGING PROJECT KNOWLEDGE (docs · AGENTS ·
- *   proposals). Every path: auto capture → weekly consolidation → narrowed
+ *   melt (manual, same skill) → CONVERGING PROJECT KNOWLEDGE (docs · AGENTS ·
+ *   proposals). Every path: auto capture → manual consolidation → narrowed
  *   surface. The results: 1.3B tokens/28d, 98.8% cache,
  *   ~$20/month — and a moat (providers approximate, never clone).
  *
@@ -57,7 +57,7 @@ const RIGHT = { x: 622, y: 60, w: 328, h: 304 } // zone: the model
 const L1 = { x: 642, y: 108, w: 290, h: 46 } // behind the provider
 const L2 = { x: 642, y: 242, w: 290, h: 46 } // behind the provider
 const PROVIDER = { x: 656, y: 150, w: 262, h: 96 }
-const PIPELINE = { x: 10, y: 374, w: 940, h: 306 } // three paths, one shape: auto → weekly → narrowed surface
+const PIPELINE = { x: 10, y: 374, w: 940, h: 306 } // three paths, one shape: auto → manual → narrowed surface
 // column 1 — the mirror (self · facts)
 const PROFILE = { x: 50, y: 400, w: 260, h: 40 }
 const PERSONAS = { x: 50, y: 448, w: 260, h: 40 }
@@ -233,19 +233,19 @@ function pipelineZone(): string {
   return `
   <g>
     <rect x="${PIPELINE.x}" y="${PIPELINE.y}" width="${PIPELINE.w}" height="${PIPELINE.h}" rx="12" fill="rgba(15,23,42,0.5)" stroke="${C.containerStroke}" stroke-width="1" stroke-dasharray="4 3"/>
-    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → WEEKLY → NARROWED')}
+    ${tag(PIPELINE.x + 8, PIPELINE.y + 14, 'THE MEMORY PIPELINE — THREE PATHS, ONE SHAPE: AUTO → MANUAL → NARROWED')}
     <!-- column 1 — the mirror (self · facts) -->
     ${skillCard(PROFILE.x, PROFILE.y, 'profile learning', 'live — the mirror', 'auto', C.pipe)}
     ${skillCard(PERSONAS.x, PERSONAS.y, 'personas aggregation', 'consolidates the personas', 'manual', C.res)}
-    ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'weekly — feeds the mirror', 'manual', C.res)}
+    ${skillCard(DISTILL.x, DISTILL.y, 'session distillation', 'manual — feeds the mirror', 'manual', C.res)}
     ${surface(MIRROR.x, MIRROR.y, 'CONVERGING MIRROR', 'an accurate model of how you think', C.pipe, `${C.pipe}88`)}
     <!-- column 2 — the workspaces (practice · global) -->
     ${skillCard(NOTE_GLOBAL.x, NOTE_GLOBAL.y, 'note-taking — global', 'patterns · durable · cross-project', 'auto', C.pipe)}
-    ${skillCard(MELT_GLOBAL.x, MELT_GLOBAL.y, 'melt — global', 'weekly · clears the notes', 'weekly', C.res)}
+    ${skillCard(MELT_GLOBAL.x, MELT_GLOBAL.y, 'melt — global', 'manual · clears the notes', 'manual', C.res)}
     ${surface(WORKSPACES.x, WORKSPACES.y, 'CONVERGING WORKSPACES', 'narrowed in place · staging cleared', C.icm, `${C.icm}88`)}
     <!-- column 3 — the project knowledge (local) -->
     ${skillCard(NOTE_PROJECT.x, NOTE_PROJECT.y, 'note-taking — project', 'repo-scoped · stays in the repo', 'auto', C.pipe)}
-    ${skillCard(MELT_PROJECT.x, MELT_PROJECT.y, 'melt — project', 'weekly · docs · AGENTS · proposal', 'weekly', C.res)}
+    ${skillCard(MELT_PROJECT.x, MELT_PROJECT.y, 'melt — project', 'manual · docs · AGENTS · proposal', 'manual', C.res)}
     ${surface(PROJECT_KNOWLEDGE.x, PROJECT_KNOWLEDGE.y, 'CONVERGING PROJECT KNOWLEDGE', 'the project docs converge', C.res, `${C.res}88`)}
     <g>
       <rect x="${ICM_LABEL.x}" y="${ICM_LABEL.y}" width="${ICM_LABEL.w}" height="${ICM_LABEL.h}" rx="10" fill="${C.card}" stroke="${C.icm}88" stroke-width="1"/>
@@ -253,7 +253,7 @@ function pipelineZone(): string {
       <text x="${ICM_LABEL.x + ICM_LABEL.w / 2}" y="${ICM_LABEL.y + 18}" text-anchor="middle" fill="${C.icm}" font-size="12" font-weight="700">ICM — the files</text>
       <text x="${ICM_LABEL.x + ICM_LABEL.w / 2}" y="${ICM_LABEL.y + 31}" text-anchor="middle" fill="${C.dim}" font-size="9.5">the source of truth — the cache is a copy, never the source</text>
     </g>
-    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">auto grows · weekly melt + personas · each surface narrows in place</text>
+    <text x="${PIPELINE.x + PIPELINE.w - 12}" y="${PIPELINE.y + 14}" text-anchor="end" fill="${C.faint}" font-size="9.5">auto grows · manual melt + personas · each surface narrows in place</text>
   </g>`
 }
 
