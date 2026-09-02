@@ -80,3 +80,22 @@ the client showcase** — demonstrate mock pages built from real components
 - **Acceptance:** one command (`npm run showcase`) produces the artifact deterministically; a page built from a real ui-components-library component renders and is captured; the showcase is the client-facing surface.
 - **Design refs:** proposal §5 (client showcase automation), `docs/development.md` (confirmed implementation plan — shared infographic authoring layer + reference artifact, §9 work sequence)
 - **Hand-off:** pending
+
+### S-07 — memory-hierarchy diagram: common MINE step + label unification ⬜
+
+- **Status:** ⬜ backlog (routed from office todo backlog 2026-09-02; NAMING Option A
+  decided 2026-09-01, do NOT apply yet — gated)
+- **Goal:** The pipeline now has a COMMON step before both columns' aggregations —
+  the mine (sessions → notes) feeds BOTH the mirror column and the workspaces column.
+- **Deliverables:** update `src/diagrams/memory-hierarchy/gen.ts` (+ any html review
+  pages affected): common MINE step first, then per-column aggregation (personas
+  aggregation → CONVERGING MIRROR; notes aggregation → CONVERGING WORKSPACES).
+  Relabel old cards: "session distillation" → "mine sessions", "melt — global" →
+  "aggregate notes", "personas aggregation" → "aggregate personas". Note-taking
+  project column stays direct (no melt). Text destinations stay as-is (PROFILE.md /
+  engineering/WORKSPACE.md).
+- **Also flagged:** wrong outputs / possible geometry checks in this diagram family
+  (raw office note) + review of `html/motherboard.html`, `context-linker-sketch.html`.
+- **Design refs:** office `processed/2026-09-02-todo-backlog/` routing log; naming
+  Option A in `todo-raw-notes.md` there.
+- **Hand-off:** pending
